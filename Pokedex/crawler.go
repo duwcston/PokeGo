@@ -91,14 +91,15 @@ func crawlPokemonsDriver(numsOfPokemons int) {
 	page.Goto(baseURL)
 
 	for i := range numsOfPokemons {
-		// simulate clicking the button to open the pokemon details
-		locator := fmt.Sprintf("button.sprite-%d", i+1)
-		button := page.Locator(locator).First()
+
+		locator := fmt.Sprintf("https://pokedex.org/#/pokemon/%d", i+1)
+		page.Goto(locator)
 		time.Sleep(500 * time.Millisecond)
-		button.Click()
 
 		fmt.Print("Pokemon ", i+1, " ")
-		crawlPokemons(page)
+		pokemon := crawlPokemons(page)
+
+		pokemons = append(pokemons, pokemon)
 
 		page.Goto(baseURL)
 		page.Reload()
@@ -119,9 +120,7 @@ func crawlPokemonsDriver(numsOfPokemons int) {
 	}
 }
 
-func crawlPokemons(page playwright.Page) {
-	pokemon := Pokemon{}
-
+func crawlStats(page playwright.Page) Stats {
 	stats := Stats{}
 	entries, _ := page.Locator("div.detail-panel-content > div.detail-header > div.detail-infobox > div.detail-stats > div.detail-stats-row").All()
 	for _, entry := range entries {
@@ -149,14 +148,13 @@ func crawlPokemons(page playwright.Page) {
 			fmt.Println("Unknown title: ", title)
 		}
 	}
-	pokemon.Stats = stats
+	return stats
+}
 
-	name, _ := page.Locator("div.detail-panel > h1.detail-panel-header").TextContent()
-	pokemon.Name = name
-
+func crawlProfile(page playwright.Page) Profile {
 	genderRatio := GenderRatio{}
 	profile := Profile{}
-	entries, _ = page.Locator("div.detail-panel-content > div.detail-below-header > div.monster-minutia").All()
+	entries, _ := page.Locator("div.detail-panel-content > div.detail-below-header > div.monster-minutia").All()
 	for _, entry := range entries {
 		title1, _ := entry.Locator("strong:not([class]):nth-child(1)").TextContent()
 		stat1, _ := entry.Locator("span:not([class]):nth-child(2)").TextContent()
@@ -203,10 +201,12 @@ func crawlPokemons(page playwright.Page) {
 			profile.HatchSteps, _ = strconv.Atoi(stat2)
 		}
 	}
-	pokemon.Profile = profile
+	return profile
+}
 
+func crawlDamegeWhenAttacked(page playwright.Page) []DamegeWhenAttacked {
 	damegeWhenAttacked := []DamegeWhenAttacked{}
-	entries, _ = page.Locator("div.when-attacked > div.when-attacked-row").All()
+	entries, _ := page.Locator("div.when-attacked > div.when-attacked-row").All()
 	for _, entry := range entries {
 		element1, _ := entry.Locator("span.monster-type:nth-child(1)").TextContent()
 		coefficient1, _ := entry.Locator("span.monster-multiplier:nth-child(2)").TextContent()
@@ -221,9 +221,49 @@ func crawlPokemons(page playwright.Page) {
 		damegeWhenAttacked = append(damegeWhenAttacked, DamegeWhenAttacked{Element: element1, Coefficient: float32(coef1)})
 		damegeWhenAttacked = append(damegeWhenAttacked, DamegeWhenAttacked{Element: element2, Coefficient: float32(coef2)})
 	}
-	pokemon.DamegeWhenAttacked = damegeWhenAttacked
+	return damegeWhenAttacked
+}
 
-	entries, _ = page.Locator("div.evolutions > div.evolution-row").All()
+func crawlMoves(page playwright.Page) []Moves {
+	moves := []Moves{}
+	time.Sleep(500 * time.Millisecond)
+	entries, _ := page.Locator("div.moves-row").All()
+	if len(entries) != 0 {
+		count := 0
+		for _, entry := range entries {
+			// simulate clicking the expand button in the move rows
+			expandButton := page.Locator("div.moves-inner-row > button.dropdown-button").First()
+			expandButton.Click()
+
+			name, _ := entry.Locator("div.moves-inner-row > span:nth-child(2)").TextContent()
+			element, _ := entry.Locator("div.moves-inner-row > span.monster-type").TextContent()
+
+			powers, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(1)").TextContent()
+			power := strings.Split(powers, ":")
+
+			acc, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(2)").TextContent()
+			accs := strings.Split(acc, ":")
+			accValue := strings.Split(accs[1], "%")
+			accInt, _ := strconv.Atoi(strings.ReplaceAll(accValue[0], " ", ""))
+
+			pps, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(3)").TextContent()
+			ppVal := strings.Split(pps, ":")
+			pp, _ := strconv.Atoi(strings.ReplaceAll(ppVal[1], " ", ""))
+			description := ""
+			//description, _ := entry.Locator("div.moves-row-detail > div.move-description").TextContent()
+
+			moves = append(moves, Moves{Name: name, Element: element, Power: power[1], Acc: accInt, PP: pp, Description: description})
+			count++
+			if count == 4 {
+				return moves
+			}
+		}
+	}
+	return moves
+}
+
+func crawlEvolution(page playwright.Page, name string) (int, string) {
+	entries, _ := page.Locator("div.evolutions > div.evolution-row").All()
 	for _, entry := range entries {
 		evolutionLabel, _ := entry.Locator("div.evolution-label > span").TextContent()
 		evolutionLabels := strings.Split(evolutionLabel, " ")
@@ -231,48 +271,34 @@ func crawlPokemons(page playwright.Page) {
 		if evolutionLabels[0] == name {
 			evolutionLevels := strings.Split(evolutionLabels[len(evolutionLabels)-1], ".")
 			evolutionLevel, _ := strconv.Atoi(evolutionLevels[0])
-			pokemon.EvolutionLevel = evolutionLevel
 
 			nextEvolution := evolutionLabels[3]
-			pokemon.NextEvolution = nextEvolution
+			return evolutionLevel, nextEvolution
 		}
 	}
+	return 0, ""
+}
 
-	moves := []Moves{}
-	entries, _ = page.Locator("div.monster-moves > div.moves-row").All()
-	for _, entry := range entries {
-		// simulate clicking the expand button in the move rows
-		expandButton := page.Locator("div.moves-inner-row > button.dropdown-button").First()
-		expandButton.Click()
-
-		name, _ := entry.Locator("div.moves-inner-row > span:nth-child(2)").TextContent()
-		element, _ := entry.Locator("div.moves-inner-row > span.monster-type").TextContent()
-
-		powers, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(1)").TextContent()
-		power := strings.Split(powers, ":")
-
-		acc, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(2)").TextContent()
-		accs := strings.Split(acc, ":")
-		accValue := strings.Split(accs[1], "%")
-		accInt, _ := strconv.Atoi(accValue[0])
-
-		pps, _ := entry.Locator("div.moves-row-detail > div.moves-row-stats > span:nth-child(3)").TextContent()
-		ppVal := strings.Split(pps, ":")
-		pp, _ := strconv.Atoi(ppVal[1])
-
-		description, _ := entry.Locator("div.moves-row-detail > div.move-description").TextContent()
-
-		moves = append(moves, Moves{Name: name, Element: element, Power: power[1], Acc: accInt, PP: pp, Description: description})
-	}
-	pokemon.Moves = moves
-
-	entries, _ = page.Locator("div.detail-types > span.monster-type").All()
+func crawlElement(page playwright.Page) []string {
+	elements := []string{}
+	entries, _ := page.Locator("div.detail-types > span.monster-type").All()
 	for _, entry := range entries {
 		element, _ := entry.TextContent()
-		pokemon.Elements = append(pokemon.Elements, element)
+		elements = append(elements, element)
 	}
+	return elements
+}
 
-	fmt.Println(name, ": ", profile)
-
-	pokemons = append(pokemons, pokemon)
+func crawlPokemons(page playwright.Page) Pokemon {
+	pokemon := Pokemon{}
+	name, _ := page.Locator("div.detail-panel > h1.detail-panel-header").TextContent()
+	pokemon.Name = name
+	pokemon.Stats = crawlStats(page)
+	pokemon.Profile = crawlProfile(page)
+	pokemon.DamegeWhenAttacked = crawlDamegeWhenAttacked(page)
+	pokemon.EvolutionLevel, pokemon.NextEvolution = crawlEvolution(page, name)
+	pokemon.Moves = crawlMoves(page)
+	pokemon.Elements = crawlElement(page)
+	fmt.Println(name, ": ", pokemon.Moves)
+	return pokemon
 }
