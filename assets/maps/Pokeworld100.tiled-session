@@ -3,14 +3,22 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "SunnysideWorld_Tileset_V0.1.tsx",
+    "activeFile": "pokeworld100.json",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "SunnysideWorld_Tileset_V0.1.tsx": {
+        "SunnysideWorld_Tileset_V0.1.json": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "pokeworld100.json": {
+            "scale": 0.33,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -133.33333333333326,
+                "y": 675.7575757575759
+            }
         }
     },
     "last.imagePath": "E:/Download/SUNNYSIDE_WORLD_ASSETS_V0.2/TILESET",
@@ -20,13 +28,15 @@
     "map.tileWidth": 16,
     "map.width": 100,
     "openFiles": [
-        "SunnysideWorld_Tileset_V0.1.tsx"
+        "pokeworld100.json",
+        "SunnysideWorld_Tileset_V0.1.json"
     ],
-    "project": "Pokeworld100.tiled-project",
+    "project": "pokeworld100.tiled-project",
     "recentFiles": [
-        "SunnysideWorld_Tileset_V0.1.tsx"
+        "SunnysideWorld_Tileset_V0.1.json",
+        "pokeworld100.json"
     ],
-    "tileset.lastUsedFormat": "tsx",
+    "tileset.lastUsedFormat": "json",
     "tileset.tileSize": {
         "height": 16,
         "width": 16
