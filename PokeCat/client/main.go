@@ -78,6 +78,8 @@ func main() {
 	ebiten.SetWindowTitle("Pokémon Multiplayer Game")
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
+	game.spawnPokeballs()
+
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}

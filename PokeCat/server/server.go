@@ -1,6 +1,7 @@
 package main
 
 import (
+	"PokeGo/entities"
 	"bufio"
 	"encoding/json"
 	"fmt"
@@ -72,7 +73,6 @@ type Player struct {
 	X         float64   `json:"X"`
 	Y         float64   `json:"Y"`
 	Inventory []Pokemon `json:"Inventory"`
-	IsTurn    bool
 	Addr      *net.UDPAddr
 	sync.Mutex
 }
@@ -84,7 +84,12 @@ const (
 var (
 	clients = make(map[net.Conn]bool)
 	lock    sync.Mutex
+	stateMu sync.Mutex
 )
+
+type Game struct {
+	otherPlayers map[string]*entities.Player
+}
 
 func main() {
 	listener, err := net.Listen("tcp", ":3000")
@@ -109,12 +114,20 @@ func main() {
 }
 
 func handleConnection(conn net.Conn) {
+	playerID := fmt.Sprintf("Player%d", rand.Intn(1000))
+
 	defer func() {
 		lock.Lock()
+		stateMu.Lock()
 		delete(clients, conn)
 		lock.Unlock()
+		stateMu.Unlock()
+		broadcast(fmt.Sprintf("DISCONNECT %s", playerID), nil)
 		conn.Close()
 	}()
+
+	broadcast(fmt.Sprintf("NEWPLAYER %s", playerID), conn)
+
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
 		msg := scanner.Text()

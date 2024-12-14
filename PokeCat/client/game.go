@@ -10,9 +10,12 @@ import (
 	"image/color"
 	"log"
 	"math/rand"
+	"net"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	// "github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -26,15 +29,23 @@ type Game struct {
 	tilemapImg        *ebiten.Image
 	camera            *Camera
 	colliders         []image.Rectangle
+
+	// Multiplayer
+	otherPlayers map[string]*entities.Player
+	serverConn   net.Conn
+
+	// Timer for spawning Pokeballs
+	spawnInterval     float64
+	maxPokeballs      int
+	lastPokeballSpawn time.Time
 }
+
+var (
+	pokeballImg, _, _ = ebitenutil.NewImageFromFile("../../assets/images/pokeball.png")
+)
 
 func NewGame() *Game {
 	playerImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/Char_001.png")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	pokeballImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/pokeball.png")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,18 +79,7 @@ func NewGame() *Game {
 
 		playerSpriteSheet: spritesheet,
 
-		pokeball: []*entities.Pokeball{
-			{
-				Img: pokeballImg,
-				X:   100,
-				Y:   100,
-			},
-			{
-				Img: pokeballImg,
-				X:   200,
-				Y:   200,
-			},
-		},
+		pokeball: []*entities.Pokeball{},
 
 		tilemapJSON: tilemapJSON,
 		tilemapImg:  tilemapImg,
@@ -102,6 +102,13 @@ func NewGame() *Game {
 				Max: image.Point{constants.Tilesize * tilemapJSON.Layers[0].Width, constants.Tilesize * tilemapJSON.Layers[0].Height},
 			},
 		},
+
+		serverConn:   conn,
+		otherPlayers: map[string]*entities.Player{},
+
+		spawnInterval:     5,  // 5 minutes in seconds
+		maxPokeballs:      50, // Spawn 50 Pokeballs
+		lastPokeballSpawn: time.Now(),
 	}
 }
 
@@ -136,21 +143,20 @@ func (g *Game) Update() error {
 		activeAnim.Update()
 	}
 
+	if time.Since(g.lastPokeballSpawn) >= time.Duration(g.spawnInterval)*time.Minute {
+		g.spawnPokeballs()
+		g.lastPokeballSpawn = time.Now() // reset the timer
+	}
+
 	for i := len(g.pokeball) - 1; i >= 0; i-- {
 		pokeball := g.pokeball[i]
 		if (int(g.player.X) >= int(pokeball.X)-10 && int(g.player.X) <= int(pokeball.X)+10) &&
 			(int(g.player.Y) >= int(pokeball.Y)-10 && int(g.player.Y) <= int(pokeball.Y)+10) {
 			fmt.Println("Pokeball collected!")
-			conn.Write([]byte("gotcha\n"))
+			g.serverConn.Write([]byte("gotcha\n"))
 			g.pokeball = append(g.pokeball[:i], g.pokeball[i+1:]...)
 		}
 	}
-
-	// Testing sending message to server
-	// if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-	// 	fmt.Println("Sending message to server...")
-	// 	conn.Write([]byte("gotcha\n"))
-	// }
 
 	g.camera.FollowPlayer(g.player.X+constants.Tilesize/2, g.player.Y+constants.Tilesize/2, constants.ScreenWidth, constants.ScreenHeight)
 	g.camera.Constrain(
@@ -158,6 +164,12 @@ func (g *Game) Update() error {
 		float64(g.tilemapJSON.Layers[0].Height)*constants.Tilesize,
 		constants.ScreenWidth, constants.ScreenHeight,
 	)
+
+	// Testing sending message to server
+	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+		fmt.Println("Sending message to server...")
+		conn.Write([]byte("Join server from ip: " + conn.LocalAddr().String() + "\n"))
+	}
 
 	return nil
 }
@@ -206,6 +218,26 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	opts.GeoM.Reset()
 
+	// Draw other players
+	for _, otherPlayer := range g.otherPlayers {
+		opts := ebiten.DrawImageOptions{}
+		opts.GeoM.Translate(otherPlayer.X, otherPlayer.Y)
+		opts.GeoM.Translate(g.camera.X, g.camera.Y)
+
+		playerFrame := 0
+		activeAnim := otherPlayer.ActiveAnimation(int(otherPlayer.Dx), int(otherPlayer.Dy))
+		if activeAnim != nil {
+			playerFrame = activeAnim.Frame()
+		}
+
+		screen.DrawImage(
+			otherPlayer.Img.SubImage(g.playerSpriteSheet.Rect(playerFrame)).(*ebiten.Image),
+			&opts,
+		)
+	}
+
+	opts.GeoM.Reset()
+
 	for _, pokeball := range g.pokeball {
 		opts := ebiten.DrawImageOptions{}
 		opts.GeoM.Translate(pokeball.X, pokeball.Y)
@@ -234,4 +266,24 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return constants.ScreenWidth, constants.ScreenHeight
+}
+
+func (g *Game) spawnPokeballs() {
+	// Clear the previous Pokéballs before spawning new ones
+	g.pokeball = []*entities.Pokeball{}
+
+	// Spawn 50 random pokeballs
+	for i := 0; i < g.maxPokeballs; i++ {
+		randomX := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Width)
+		randomY := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Height)
+
+		// Add new pokeball to the list
+		g.pokeball = append(g.pokeball, &entities.Pokeball{
+			Img: pokeballImg,
+			X:   randomX,
+			Y:   randomY,
+		})
+	}
+
+	fmt.Println("50 Pokéballs spawned on the map!")
 }

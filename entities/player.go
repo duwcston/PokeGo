@@ -12,6 +12,7 @@ const (
 )
 
 type Player struct {
+	ID string
 	*Sprite
 	Animations map[PlayerState]*animations.Animation
 }
