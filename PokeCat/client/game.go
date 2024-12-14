@@ -9,10 +9,12 @@ import (
 	"image"
 	"image/color"
 	"log"
-	"math/rand/v2"
+	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+
+	// "github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
@@ -27,22 +29,22 @@ type Game struct {
 }
 
 func NewGame() *Game {
-	playerImg, _, err := ebitenutil.NewImageFromFile("../assets/images/Char_001.png")
+	playerImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/Char_001.png")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	pokeballImg, _, err := ebitenutil.NewImageFromFile("../assets/images/pokeball.png")
+	pokeballImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/pokeball.png")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	tilemapImg, _, err := ebitenutil.NewImageFromFile("../assets/images/Tileset.png")
+	tilemapImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/Tileset.png")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	tilemapJSON, err := NewTilemapJSON("../assets/maps/pokeworld100.json")
+	tilemapJSON, err := NewTilemapJSON("../../assets/maps/pokeworld100.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -104,6 +106,8 @@ func NewGame() *Game {
 }
 
 func (g *Game) Update() error {
+	// fmt.Println("Player X:", int(g.player.X), "Player Y:", int(g.player.Y))
+
 	g.player.Dx = 0
 	g.player.Dy = 0
 
@@ -132,11 +136,21 @@ func (g *Game) Update() error {
 		activeAnim.Update()
 	}
 
-	for _, pokeball := range g.pokeball {
-		if g.player.X == pokeball.X && g.player.Y == pokeball.Y {
+	for i := len(g.pokeball) - 1; i >= 0; i-- {
+		pokeball := g.pokeball[i]
+		if (int(g.player.X) >= int(pokeball.X)-10 && int(g.player.X) <= int(pokeball.X)+10) &&
+			(int(g.player.Y) >= int(pokeball.Y)-10 && int(g.player.Y) <= int(pokeball.Y)+10) {
 			fmt.Println("Pokeball collected!")
+			conn.Write([]byte("gotcha\n"))
+			g.pokeball = append(g.pokeball[:i], g.pokeball[i+1:]...)
 		}
 	}
+
+	// Testing sending message to server
+	// if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+	// 	fmt.Println("Sending message to server...")
+	// 	conn.Write([]byte("gotcha\n"))
+	// }
 
 	g.camera.FollowPlayer(g.player.X+constants.Tilesize/2, g.player.Y+constants.Tilesize/2, constants.ScreenWidth, constants.ScreenHeight)
 	g.camera.Constrain(

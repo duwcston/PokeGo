@@ -5,7 +5,6 @@ go 1.22.0
 toolchain go1.23.1
 
 require (
-	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
 	github.com/hajimehoshi/ebiten/v2 v2.8.5
 	github.com/playwright-community/playwright-go v0.4802.0
 )

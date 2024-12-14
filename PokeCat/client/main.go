@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"image"
 	"log"
+	"net"
+	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 
@@ -50,12 +54,29 @@ func CheckCollisionVertical(sprite *entities.Sprite, colliders []image.Rectangle
 	}
 }
 
+var conn net.Conn
+
 func main() {
-	ebiten.SetWindowSize(640, 480)
-	ebiten.SetWindowTitle("Pokemon Go")
-	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+	var err error
+	conn, err = net.Dial("tcp", "localhost:3000")
+	if err != nil {
+		fmt.Println("Connection error:", err)
+		os.Exit(1)
+	}
+	defer conn.Close()
+
+	go func() {
+		scanner := bufio.NewScanner(conn)
+		for scanner.Scan() {
+			fmt.Println("Server:", scanner.Text())
+		}
+	}()
 
 	game := NewGame()
+
+	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
+	ebiten.SetWindowTitle("Pokémon Multiplayer Game")
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
