@@ -14,6 +14,12 @@ import (
 	"PokeGo/entities"
 )
 
+const (
+	HOST = "localhost"
+	PORT = "3000"
+	TYPE = "tcp"
+)
+
 func CheckCollisionHorizontal(player *entities.Player, colliders []image.Rectangle) {
 	spriteRect := image.Rect(
 		int(player.X),
@@ -58,7 +64,7 @@ var conn net.Conn
 
 func main() {
 	var err error
-	conn, err = net.Dial("tcp", "localhost:3000")
+	conn, err = net.Dial(TYPE, HOST+":"+PORT)
 	if err != nil {
 		fmt.Println("Connection error:", err)
 		os.Exit(1)

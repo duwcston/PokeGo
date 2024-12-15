@@ -78,6 +78,9 @@ type Player struct {
 const (
 	pokedexPath = "../../Pokedex/pokedex.json"
 	maxCapacity = 200
+	HOST        = "localhost"
+	PORT        = "3000"
+	TYPE        = "tcp"
 )
 
 var (
@@ -86,7 +89,7 @@ var (
 )
 
 func main() {
-	listener, err := net.Listen("tcp", ":3000")
+	listener, err := net.Listen(TYPE, HOST+":"+PORT)
 	if err != nil {
 		fmt.Println("Error starting server:", err)
 		return
