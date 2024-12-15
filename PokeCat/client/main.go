@@ -14,42 +14,42 @@ import (
 	"PokeGo/entities"
 )
 
-func CheckCollisionHorizontal(sprite *entities.Sprite, colliders []image.Rectangle) {
+func CheckCollisionHorizontal(player *entities.Player, colliders []image.Rectangle) {
 	spriteRect := image.Rect(
-		int(sprite.X),
-		int(sprite.Y),
-		int(sprite.X)+constants.SpriteSize,
-		int(sprite.Y)+constants.SpriteSize,
+		int(player.X),
+		int(player.Y),
+		int(player.X)+constants.SpriteSize,
+		int(player.Y)+constants.SpriteSize,
 	)
 
 	for _, collider := range colliders {
 		if spriteRect.Overlaps(collider) {
-			if sprite.Dx > 0.0 {
-				sprite.X = float64(collider.Min.X) - constants.SpriteSize
-			} else if sprite.Dx < 0.0 {
-				sprite.X = float64(collider.Max.X)
+			if player.Dx > 0.0 {
+				player.X = float64(collider.Min.X) - constants.SpriteSize
+			} else if player.Dx < 0.0 {
+				player.X = float64(collider.Max.X)
 			}
-			sprite.Dx = 0.0
+			player.Dx = 0.0
 		}
 	}
 }
 
-func CheckCollisionVertical(sprite *entities.Sprite, colliders []image.Rectangle) {
+func CheckCollisionVertical(player *entities.Player, colliders []image.Rectangle) {
 	spriteRect := image.Rect(
-		int(sprite.X),
-		int(sprite.Y),
-		int(sprite.X)+constants.SpriteSize,
-		int(sprite.Y)+constants.SpriteSize,
+		int(player.X),
+		int(player.Y),
+		int(player.X)+constants.SpriteSize,
+		int(player.Y)+constants.SpriteSize,
 	)
 
 	for _, collider := range colliders {
 		if spriteRect.Overlaps(collider) {
-			if sprite.Dy > 0.0 {
-				sprite.Y = float64(collider.Min.Y) - constants.SpriteSize
-			} else if sprite.Dy < 0.0 {
-				sprite.Y = float64(collider.Max.Y)
+			if player.Dy > 0.0 {
+				player.Y = float64(collider.Min.Y) - constants.SpriteSize
+			} else if player.Dy < 0.0 {
+				player.Y = float64(collider.Max.Y)
 			}
-			sprite.Dy = 0.0
+			player.Dy = 0.0
 		}
 	}
 }
@@ -64,6 +64,14 @@ func main() {
 		os.Exit(1)
 	}
 	defer conn.Close()
+
+	fmt.Println("Connected to server")
+
+	fmt.Print("Enter your name: ")
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	name := scanner.Text()
+	conn.Write([]byte("JOIN AS " + name + "\n"))
 
 	go func() {
 		scanner := bufio.NewScanner(conn)

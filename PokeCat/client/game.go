@@ -64,11 +64,11 @@ func NewGame() *Game {
 
 	return &Game{
 		player: &entities.Player{
-			Sprite: &entities.Sprite{
-				Img: playerImg,
-				X:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Width),
-				Y:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Height),
-			},
+
+			Img: playerImg,
+			X:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Width),
+			Y:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Height),
+
 			Animations: map[entities.PlayerState]*animations.Animation{
 				entities.Down:  animations.NewAnimation(0, 3, 1, 10.0),
 				entities.Left:  animations.NewAnimation(4, 7, 1, 10.0),
@@ -114,6 +114,10 @@ func NewGame() *Game {
 
 func (g *Game) Update() error {
 	// fmt.Println("Player X:", int(g.player.X), "Player Y:", int(g.player.Y))
+	// if g.player.Dx != 0 || g.player.Dy != 0 {
+	// 	msg := fmt.Sprintf("MOVE X:%f Y:%f", g.player.X, g.player.Y)
+	// 	g.serverConn.Write([]byte(msg + "\n"))
+	// }
 
 	g.player.Dx = 0
 	g.player.Dy = 0
@@ -135,8 +139,8 @@ func (g *Game) Update() error {
 	g.player.X += g.player.Dx
 	g.player.Y += g.player.Dy
 
-	CheckCollisionHorizontal(g.player.Sprite, g.colliders)
-	CheckCollisionVertical(g.player.Sprite, g.colliders)
+	CheckCollisionHorizontal(g.player, g.colliders)
+	CheckCollisionVertical(g.player, g.colliders)
 
 	activeAnim := g.player.ActiveAnimation(int(g.player.Dx), int(g.player.Dy))
 	if activeAnim != nil {
@@ -220,7 +224,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	// Draw other players
 	for _, otherPlayer := range g.otherPlayers {
-		opts := ebiten.DrawImageOptions{}
 		opts.GeoM.Translate(otherPlayer.X, otherPlayer.Y)
 		opts.GeoM.Translate(g.camera.X, g.camera.Y)
 
@@ -234,9 +237,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			otherPlayer.Img.SubImage(g.playerSpriteSheet.Rect(playerFrame)).(*ebiten.Image),
 			&opts,
 		)
-	}
 
-	opts.GeoM.Reset()
+		opts.GeoM.Reset()
+	}
 
 	for _, pokeball := range g.pokeball {
 		opts := ebiten.DrawImageOptions{}

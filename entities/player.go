@@ -1,6 +1,10 @@
 package entities
 
-import "PokeGo/animations"
+import (
+	"PokeGo/animations"
+
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type PlayerState uint8
 
@@ -12,8 +16,12 @@ const (
 )
 
 type Player struct {
-	ID string
-	*Sprite
+	ID         string
+	Img        *ebiten.Image
+	X          float64
+	Y          float64
+	Dx         float64
+	Dy         float64
 	Animations map[PlayerState]*animations.Animation
 }
 
