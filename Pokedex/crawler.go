@@ -1,73 +1,23 @@
 package main
 
 import (
+	"PokeGo/model"
 	"encoding/json"
 	"fmt"
+	"github.com/playwright-community/playwright-go"
 	"log"
 	"os"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/playwright-community/playwright-go"
 )
-
-type Stats struct {
-	HP         int `json:"HP"`
-	Attack     int `json:"Attack"`
-	Defense    int `json:"Defense"`
-	Speed      int `json:"Speed"`
-	Sp_Attack  int `json:"Sp_Attack"`
-	Sp_Defense int `json:"Sp_Defense"`
-}
-
-type GenderRatio struct {
-	MaleRatio   float32 `json:"MaleRatio"`
-	FemaleRatio float32 `json:"FemaleRatio"`
-}
-
-type Profile struct {
-	Height      float32     `json:"Height"`
-	Weight      float32     `json:"Weight"`
-	CatchRate   float32     `json:"CatchRate"`
-	GenderRatio GenderRatio `json:"GenderRatio"`
-	EggGroup    string      `json:"EggGroup"`
-	HatchSteps  int         `json:"HatchSteps"`
-	Abilities   string      `json:"Abilities"`
-}
-
-type DamegeWhenAttacked struct {
-	Element     string  `json:"Element"`
-	Coefficient float32 `json:"Coefficient"`
-}
-
-type Moves struct {
-	Name        string `json:"Name"`
-	Element     string `json:"Element"`
-	Power       string `json:"Power"`
-	Acc         int    `json:"Acc"`
-	PP          int    `json:"PP"`
-	Description string `json:"Description"`
-}
-
-type Pokemon struct {
-	Name               string               `json:"Name"`
-	Elements           []string             `json:"Elements"`
-	EV                 int                  `json:"EV"`
-	Stats              Stats                `json:"Stats"`
-	Profile            Profile              `json:"Profile"`
-	DamegeWhenAttacked []DamegeWhenAttacked `json:"DamegeWhenAttacked"`
-	EvolutionLevel     int                  `json:"EvolutionLevel"`
-	NextEvolution      string               `json:"NextEvolution"`
-	Moves              []Moves              `json:"Moves"`
-}
 
 const (
 	numberOfPokemons = 649
 	baseURL          = "https://pokedex.org/#/"
 )
 
-var pokemons []Pokemon
+var pokemons []model.Pokemon
 
 func main() {
 	crawlPokemonsDriver(numberOfPokemons)
@@ -120,8 +70,8 @@ func crawlPokemonsDriver(numsOfPokemons int) {
 	}
 }
 
-func crawlStats(page playwright.Page) Stats {
-	stats := Stats{}
+func crawlStats(page playwright.Page) model.Stats {
+	stats := model.Stats{}
 	entries, _ := page.Locator("div.detail-panel-content > div.detail-header > div.detail-infobox > div.detail-stats > div.detail-stats-row").All()
 	for _, entry := range entries {
 		title, _ := entry.Locator("span:not([class])").TextContent()
@@ -151,9 +101,9 @@ func crawlStats(page playwright.Page) Stats {
 	return stats
 }
 
-func crawlProfile(page playwright.Page) Profile {
-	genderRatio := GenderRatio{}
-	profile := Profile{}
+func crawlProfile(page playwright.Page) model.Profile {
+	genderRatio := model.GenderRatio{}
+	profile := model.Profile{}
 	entries, _ := page.Locator("div.detail-panel-content > div.detail-below-header > div.monster-minutia").All()
 	for _, entry := range entries {
 		title1, _ := entry.Locator("strong:not([class]):nth-child(1)").TextContent()
@@ -204,8 +154,8 @@ func crawlProfile(page playwright.Page) Profile {
 	return profile
 }
 
-func crawlDamegeWhenAttacked(page playwright.Page) []DamegeWhenAttacked {
-	damegeWhenAttacked := []DamegeWhenAttacked{}
+func crawlDamegeWhenAttacked(page playwright.Page) []model.DamegeWhenAttacked {
+	damegeWhenAttacked := []model.DamegeWhenAttacked{}
 	entries, _ := page.Locator("div.when-attacked > div.when-attacked-row").All()
 	for _, entry := range entries {
 		element1, _ := entry.Locator("span.monster-type:nth-child(1)").TextContent()
@@ -218,14 +168,14 @@ func crawlDamegeWhenAttacked(page playwright.Page) []DamegeWhenAttacked {
 		coefficients2 := strings.Split(coefficient2, "x")
 		coef2, _ := strconv.ParseFloat(coefficients2[0], 32)
 
-		damegeWhenAttacked = append(damegeWhenAttacked, DamegeWhenAttacked{Element: element1, Coefficient: float32(coef1)})
-		damegeWhenAttacked = append(damegeWhenAttacked, DamegeWhenAttacked{Element: element2, Coefficient: float32(coef2)})
+		damegeWhenAttacked = append(damegeWhenAttacked, model.DamegeWhenAttacked{Element: element1, Coefficient: float32(coef1)})
+		damegeWhenAttacked = append(damegeWhenAttacked, model.DamegeWhenAttacked{Element: element2, Coefficient: float32(coef2)})
 	}
 	return damegeWhenAttacked
 }
 
-func crawlMoves(page playwright.Page) []Moves {
-	moves := []Moves{}
+func crawlMoves(page playwright.Page) []model.Moves {
+	moves := []model.Moves{}
 	time.Sleep(500 * time.Millisecond)
 	entries, _ := page.Locator("div.moves-row").All()
 	if len(entries) != 0 {
@@ -252,7 +202,7 @@ func crawlMoves(page playwright.Page) []Moves {
 			description := ""
 			//description, _ := entry.Locator("div.moves-row-detail > div.move-description").TextContent()
 
-			moves = append(moves, Moves{Name: name, Element: element, Power: power[1], Acc: accInt, PP: pp, Description: description})
+			moves = append(moves, model.Moves{Name: name, Element: element, Power: power[1], Acc: accInt, PP: pp, Description: description})
 			count++
 			if count == 4 {
 				return moves
@@ -289,8 +239,8 @@ func crawlElement(page playwright.Page) []string {
 	return elements
 }
 
-func crawlPokemons(page playwright.Page) Pokemon {
-	pokemon := Pokemon{}
+func crawlPokemons(page playwright.Page) model.Pokemon {
+	pokemon := model.Pokemon{}
 	name, _ := page.Locator("div.detail-panel > h1.detail-panel-header").TextContent()
 	pokemon.Name = name
 	pokemon.Stats = crawlStats(page)
