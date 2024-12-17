@@ -17,7 +17,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
-	// "github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
@@ -30,7 +29,7 @@ type Game struct {
 	camera            *Camera
 	colliders         []image.Rectangle
 
-	// Multiplayer
+	// Multiplayer simulation
 	otherPlayers map[string]*entities.Player
 	serverConn   net.Conn
 
@@ -38,6 +37,11 @@ type Game struct {
 	spawnInterval     float64
 	maxPokeballs      int
 	lastPokeballSpawn time.Time
+
+	// Auto-move
+	isAutoMoveEnabled bool
+	moveTimer         time.Duration
+	lastMoveTime      time.Time
 }
 
 var (
@@ -109,15 +113,36 @@ func NewGame() *Game {
 		spawnInterval:     5,  // 5 minutes in seconds
 		maxPokeballs:      50, // Spawn 50 Pokeballs
 		lastPokeballSpawn: time.Now(),
+
+		isAutoMoveEnabled: false,
+		moveTimer:         time.Second, // Move every second
+		lastMoveTime:      time.Now(),  // Track the last move time
 	}
 }
 
 func (g *Game) Update() error {
 	// fmt.Println("Player X:", int(g.player.X), "Player Y:", int(g.player.Y))
-	// if g.player.Dx != 0 || g.player.Dy != 0 {
-	// 	msg := fmt.Sprintf("MOVE X:%f Y:%f", g.player.X, g.player.Y)
-	// 	g.serverConn.Write([]byte(msg + "\n"))
-	// }
+
+	if g.isAutoMoveEnabled && time.Since(g.lastMoveTime) >= g.moveTimer {
+		randomDirection := rand.Intn(4)
+		switch randomDirection {
+		case 0:
+			g.player.Dx = -constants.Tilesize
+			g.player.Dy = 0
+		case 1:
+			g.player.Dx = constants.Tilesize
+			g.player.Dy = 0
+		case 2:
+			g.player.Dx = 0
+			g.player.Dy = -constants.Tilesize
+		case 3:
+			g.player.Dx = 0
+			g.player.Dy = constants.Tilesize
+		}
+		g.player.X += g.player.Dx
+		g.player.Y += g.player.Dy
+		g.lastMoveTime = time.Now()
+	}
 
 	g.player.Dx = 0
 	g.player.Dy = 0
@@ -169,10 +194,9 @@ func (g *Game) Update() error {
 		constants.ScreenWidth, constants.ScreenHeight,
 	)
 
-	// Testing sending message to server
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		fmt.Println("Sending message to server...")
-		conn.Write([]byte("Join server from ip: " + conn.LocalAddr().String() + "\n"))
+		g.isAutoMoveEnabled = !g.isAutoMoveEnabled
+		fmt.Println("Auto-move enabled:", g.isAutoMoveEnabled)
 	}
 
 	return nil
@@ -289,4 +313,11 @@ func (g *Game) spawnPokeballs() {
 	}
 
 	fmt.Println("50 Pokéballs spawned on the map!")
+}
+
+func (g *Game) ToggleAutoMove() {
+	g.isAutoMoveEnabled = !g.isAutoMoveEnabled
+	if g.isAutoMoveEnabled {
+		g.lastMoveTime = time.Now() // Reset the move timer when enabling auto-move
+	}
 }

@@ -7,6 +7,9 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 
@@ -17,7 +20,7 @@ import (
 const (
 	HOST = "localhost"
 	PORT = "3000"
-	TYPE = "tcp"
+	TYPE = "udp4" // Use UDP for communication
 )
 
 func CheckCollisionHorizontal(player *entities.Player, colliders []image.Rectangle) {
@@ -60,32 +63,57 @@ func CheckCollisionVertical(player *entities.Player, colliders []image.Rectangle
 	}
 }
 
-var conn net.Conn
+var conn *net.UDPConn
+var serverAddr *net.UDPAddr
 
 func main() {
+	// Resolve the server address
 	var err error
-	conn, err = net.Dial(TYPE, HOST+":"+PORT)
+	serverAddr, err = net.ResolveUDPAddr(TYPE, HOST+":"+PORT)
+	if err != nil {
+		fmt.Println("Error resolving server address:", err)
+		os.Exit(1)
+	}
+
+	// Dial the server using UDP
+	conn, err = net.DialUDP(TYPE, nil, serverAddr)
 	if err != nil {
 		fmt.Println("Connection error:", err)
 		os.Exit(1)
 	}
 	defer conn.Close()
 
-	fmt.Println("Connected to server")
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
+	// Start a goroutine to listen for shutdown signals
+	go func() {
+		sig := <-sigs
+		fmt.Println("Received signal:", sig)
+
+		conn.Write([]byte("QUIT\n"))
+
+		time.Sleep(1 * time.Second)
+		os.Exit(0)
+	}()
+
+	fmt.Println("Connected to server")
+	fmt.Println("Enter 'QUIT' to leave the game")
+
+	// Send player name to the server
 	fmt.Print("Enter your name: ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	name := scanner.Text()
 	conn.Write([]byte("JOIN AS " + name + "\n"))
 
-	go func() {
-		scanner := bufio.NewScanner(conn)
-		for scanner.Scan() {
-			fmt.Println("Server:", scanner.Text())
-		}
-	}()
+	// Listen for messages from the server
+	go listenToServer(conn)
 
+	// Listen for player input
+	go listenForInput(conn)
+
+	// Start the game
 	game := NewGame()
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
@@ -96,5 +124,31 @@ func main() {
 
 	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
+	}
+}
+
+func listenToServer(conn *net.UDPConn) {
+	buffer := make([]byte, 1024)
+	for {
+		n, _, err := conn.ReadFromUDP(buffer)
+		if err != nil {
+			fmt.Println("Error reading from server:", err)
+			continue
+		}
+		message := string(buffer[:n])
+		fmt.Println("Server:", message)
+
+		if message == "You have left the game.\n" {
+			os.Exit(0)
+		}
+	}
+}
+
+func listenForInput(conn *net.UDPConn) {
+	for {
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		text := scanner.Text()
+		conn.Write([]byte(text + "\n"))
 	}
 }
