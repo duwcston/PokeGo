@@ -16,8 +16,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-
-	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 type Game struct {
@@ -70,8 +68,8 @@ func NewGame() *Game {
 		player: &entities.Player{
 
 			Img: playerImg,
-			X:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Width),
-			Y:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Height),
+			X:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Width-constants.Tilesize),
+			Y:   rand.Float64() * float64(constants.Tilesize*tilemapJSON.Layers[0].Height-constants.Tilesize),
 
 			Animations: map[entities.PlayerState]*animations.Animation{
 				entities.Down:  animations.NewAnimation(0, 3, 1, 10.0),
@@ -104,6 +102,22 @@ func NewGame() *Game {
 			{
 				Min: image.Point{constants.Tilesize*tilemapJSON.Layers[0].Width - constants.Tilesize, 0},
 				Max: image.Point{constants.Tilesize * tilemapJSON.Layers[0].Width, constants.Tilesize * tilemapJSON.Layers[0].Height},
+			},
+			{
+				Min: image.Point{constants.Tilesize * 18, constants.Tilesize * 17},
+				Max: image.Point{constants.Tilesize * 23, constants.Tilesize * 22},
+			},
+			{
+				Min: image.Point{constants.Tilesize * 18, constants.Tilesize * 76},
+				Max: image.Point{constants.Tilesize * 23, constants.Tilesize * 82},
+			},
+			{
+				Min: image.Point{constants.Tilesize * 78, constants.Tilesize * 17},
+				Max: image.Point{constants.Tilesize * 83, constants.Tilesize * 22},
+			},
+			{
+				Min: image.Point{constants.Tilesize * 78, constants.Tilesize * 76},
+				Max: image.Point{constants.Tilesize * 83, constants.Tilesize * 81},
 			},
 		},
 
@@ -277,18 +291,25 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		opts.GeoM.Reset()
 	}
 
-	for _, collider := range g.colliders {
-		vector.StrokeRect(
-			screen,
-			float32(collider.Min.X)+float32(g.camera.X),
-			float32(collider.Min.Y)+float32(g.camera.Y),
-			float32(collider.Dx()),
-			float32(collider.Dy()),
-			1.0,
-			color.RGBA{255, 0, 0, 255},
-			true,
-		)
-	}
+	// for _, collider := range g.colliders {
+	// 	vector.StrokeRect(
+	// 		screen,
+	// 		float32(collider.Min.X)+float32(g.camera.X),
+	// 		float32(collider.Min.Y)+float32(g.camera.Y),
+	// 		float32(collider.Dx()),
+	// 		float32(collider.Dy()),
+	// 		1.0,
+	// 		color.RGBA{255, 0, 0, 255},
+	// 		true,
+	// 	)
+	// }
+
+	ebitenutil.DebugPrint(screen, "Auto mode: "+fmt.Sprint(func() string {
+		if g.isAutoMoveEnabled {
+			return "ON"
+		}
+		return "OFF"
+	}()))
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
@@ -301,8 +322,8 @@ func (g *Game) spawnPokeballs() {
 
 	// Spawn 50 random pokeballs
 	for i := 0; i < g.maxPokeballs; i++ {
-		randomX := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Width)
-		randomY := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Height)
+		randomX := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Width-constants.Tilesize)
+		randomY := rand.Float64() * float64(constants.Tilesize*g.tilemapJSON.Layers[0].Height-constants.Tilesize)
 
 		// Add new pokeball to the list
 		g.pokeball = append(g.pokeball, &entities.Pokeball{
