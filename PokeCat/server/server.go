@@ -1,6 +1,8 @@
 package main
 
 import (
+	"PokeGo/PokeBat"
+	"PokeGo/model"
 	"encoding/json"
 	"fmt"
 	"math"
@@ -8,79 +10,28 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"strings"
 	"sync"
 	"syscall"
 )
 
-type Stats struct {
-	HP         int `json:"HP"`
-	Attack     int `json:"Attack"`
-	Defense    int `json:"Defense"`
-	Speed      int `json:"Speed"`
-	Sp_Attack  int `json:"Sp_Attack"`
-	Sp_Defense int `json:"Sp_Defense"`
-}
-
-type GenderRatio struct {
-	MaleRatio   float32 `json:"MaleRatio"`
-	FemaleRatio float32 `json:"FemaleRatio"`
-}
-
-type Profile struct {
-	Height      float32     `json:"Height"`
-	Weight      float32     `json:"Weight"`
-	CatchRate   float32     `json:"CatchRate"`
-	GenderRatio GenderRatio `json:"GenderRatio"`
-	EggGroup    string      `json:"EggGroup"`
-	HatchSteps  int         `json:"HatchSteps"`
-	Abilities   string      `json:"Abilities"`
-}
-
-type DamegeWhenAttacked struct {
-	Element     string  `json:"Element"`
-	Coefficient float32 `json:"Coefficient"`
-}
-
-type Moves struct {
-	Name        string `json:"Name"`
-	Element     string `json:"Element"`
-	Power       string `json:"Power"`
-	Acc         int    `json:"Acc"`
-	PP          int    `json:"PP"`
-	Description string `json:"Description"`
-}
-
-type Pokemon struct {
-	Name               string               `json:"Name"`
-	Elements           []string             `json:"Elements"`
-	Level              int                  `json:"Level"`
-	EV                 float64              `json:"EV"`
-	Stats              Stats                `json:"Stats"`
-	Profile            Profile              `json:"Profile"`
-	DamegeWhenAttacked []DamegeWhenAttacked `json:"DamegeWhenAttacked"`
-	EvolutionLevel     int                  `json:"EvolutionLevel"`
-	NextEvolution      string               `json:"NextEvolution"`
-	Moves              []Moves              `json:"Moves"`
-}
-
-type Player struct {
-	Name      string    `json:"Name"`
-	Inventory []Pokemon `json:"Inventory"`
-}
-
 const (
 	pokedexPath = "../../Pokedex/pokedex.json"
+	//pokedexPath = "Pokedex/pokedex.json"
+
 	maxCapacity = 200
 	HOST        = "localhost"
 	PORT        = "3000"
+	//InventoryPath = "PokeCat/Inventories/Player_%s_Inventory.json"
+	InventoryPath = "../Inventories/Player_%s_Inventory.json"
 )
 
 // Track connected players
 var (
-	connectedPlayers = make(map[string]*net.UDPAddr)
+	connectedPlayers = make(map[string]*model.Player)
 	mutex            = sync.Mutex{}
+	IsInBattel       = false
+	AllPokemons      *[]model.Pokemon
 )
 
 func main() {
@@ -111,59 +62,136 @@ func main() {
 		fmt.Println("Received signal:", sig)
 		handleServerShutdown(conn)
 	}()
-
+	AllPokemons, err = getAllPokemons(pokedexPath)
+	if err != nil {
+		fmt.Println("Error resolving address: ", err)
+		return
+	}
 	buffer := make([]byte, 1024)
 	for {
-		// Read incoming message
-		n, clientAddr, err := conn.ReadFromUDP(buffer)
-		if err != nil {
-			fmt.Println("Error reading:", err)
-			continue
+		if !IsInBattel {
+			// Read incoming message
+			n, clientAddr, err := conn.ReadFromUDP(buffer)
+			if err != nil {
+				fmt.Println("Error reading:", err)
+				continue
+			}
+			message := strings.TrimSpace(string(buffer[:n]))
+			// fmt.Printf("Received '%s' from %s\n", message, clientAddr)
+
+			// Handle player joining
+			if strings.HasPrefix(message, "JOIN AS ") {
+				playerName := strings.TrimPrefix(message, "JOIN AS ")
+				handlePlayerConnection(playerName, conn, clientAddr)
+				continue
+			}
+
+			var Sender *model.Player
+			for _, client := range connectedPlayers {
+				if client.Addr.String() == clientAddr.String() {
+					Sender = client
+					break
+				}
+			}
+			if message == "QUIT" {
+				playerName := findPlayerNameByAddr(clientAddr)
+				handlePlayerDisconnection(playerName, conn, clientAddr)
+				continue
+			}
+
+			if message == "gotcha" {
+				sendRandomPokemon(*AllPokemons, conn, clientAddr)
+				continue
+			}
+			if message == "Inventory" {
+				for _, inv := range Sender.Inventory {
+					inventoryDetails := fmt.Sprintf("Player Inventory: Name: %s, Level: %d", inv.Name, inv.Level)
+					_, err := conn.WriteToUDP([]byte(inventoryDetails), Sender.Addr)
+					if err != nil {
+						fmt.Println("Error sending connect message to client:", err)
+					}
+				}
+				continue
+			}
+			if strings.HasPrefix(message, "@") {
+				msg := ""
+				parts := strings.SplitN(message, " ", 2)
+				if len(parts) >= 2 {
+					msg = parts[1]
+				}
+				target := parts[0][1:] // Remove "@" prefix
+
+				broadcastMsg := fmt.Sprintf("Broadcast : Battle between %s and %s", Sender.Name, target)
+				for _, client := range connectedPlayers {
+					if client.Addr.String() != Sender.Addr.String() { // Exclude sender
+						conn.WriteToUDP([]byte(broadcastMsg), client.Addr)
+					}
+				}
+				// Private message to specific user
+				if Receiver, ok := connectedPlayers[target]; ok {
+					privateMsg := fmt.Sprintf("Bat from %s: %s", Sender.Name, msg)
+					conn.WriteToUDP([]byte(privateMsg), Receiver.Addr)
+					IsInBattel = true
+					winner, LevelUpPokemons := PokeBat.Battle(Sender, Receiver, conn, Sender.Addr, Receiver.Addr)
+					IsInBattel = false
+					// Evolution
+					if LevelUpPokemons != nil {
+						PokeBat.EvolutionProcess(*connectedPlayers[winner], LevelUpPokemons, *AllPokemons, conn)
+						if err := SaveInventory(Sender); err != nil {
+							fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
+							conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
+							mutex.Unlock()
+							return
+						}
+					}
+					continue
+				} else {
+					conn.WriteToUDP([]byte("User "+target+" not found"), Sender.Addr)
+					continue
+				}
+			}
+
+			conn.WriteToUDP([]byte("Unknown command\n"), clientAddr)
 		}
-
-		message := strings.TrimSpace(string(buffer[:n]))
-		// fmt.Printf("Received '%s' from %s\n", message, clientAddr)
-
-		// Handle player joining
-		if strings.HasPrefix(message, "JOIN AS ") {
-			playerName := strings.TrimPrefix(message, "JOIN AS ")
-			handlePlayerConnection(playerName, conn, clientAddr)
-			continue
-		}
-
-		if message == "QUIT" {
-			playerName := findPlayerNameByAddr(clientAddr)
-			handlePlayerDisconnection(playerName, conn, clientAddr)
-			continue
-		}
-
-		if message == "gotcha" {
-			sendRandomPokemon(conn, clientAddr)
-			continue
-		}
-
-		conn.WriteToUDP([]byte("Unknown command\n"), clientAddr)
 	}
+}
+
+func getAllPokemons(filename string) (*[]model.Pokemon, error) {
+	// Read the JSON file
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	// Unmarshal the JSON data into a slice of Pokemon structs
+	var pokemons []model.Pokemon
+	err = json.Unmarshal(data, &pokemons)
+	if err != nil {
+		return nil, err
+	}
+	return &pokemons, nil
 }
 
 func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPAddr) {
 	mutex.Lock()
-	connectedPlayers[playerName] = addr
+
 	mutex.Unlock()
 
 	fmt.Printf("Player '%s' connected from %s\n", playerName, addr)
 
 	conn.WriteToUDP([]byte("Welcome "+playerName+"!\n"), addr)
+	conn.WriteToUDP([]byte("\n Enter 'Inventory' to view Pokemons \n Enter '@username' to battle"), addr)
 
 	broadcastMessage(fmt.Sprintf("Player %s has joined the game!", playerName), addr, conn)
 
-	player := &Player{
+	player := &model.Player{
 		Name:      playerName,
-		Inventory: []Pokemon{},
+		Addr:      addr,
+		Inventory: []model.Pokemon{},
 	}
-
+	connectedPlayers[playerName] = player
 	// Load player's inventory
-	if err := LoadInventory(player); err != nil {
+	if err := LoadInventory(player, addr); err != nil {
 		fmt.Printf("Error loading inventory for %s: %v\n", playerName, err)
 		conn.WriteToUDP([]byte("Failed to load inventory\n"), addr)
 		return
@@ -171,7 +199,7 @@ func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPA
 }
 
 func handlePlayerDisconnection(playerName string, conn *net.UDPConn, addr *net.UDPAddr) {
-	delete(connectedPlayers, addr.String())
+	delete(connectedPlayers, playerName)
 
 	message := fmt.Sprintf("Player %s has left the game.", playerName)
 	fmt.Println(message)
@@ -181,8 +209,8 @@ func handlePlayerDisconnection(playerName string, conn *net.UDPConn, addr *net.U
 }
 
 func handleServerShutdown(conn *net.UDPConn) {
-	for _, addr := range connectedPlayers {
-		conn.WriteToUDP([]byte("Server is shutting down\n"), addr)
+	for _, player := range connectedPlayers {
+		conn.WriteToUDP([]byte("Server is shutting down\n"), player.Addr)
 	}
 
 	conn.Close()
@@ -193,30 +221,14 @@ func broadcastMessage(message string, senderAddr *net.UDPAddr, conn *net.UDPConn
 	mutex.Lock()
 	defer mutex.Unlock()
 
-	for _, addr := range connectedPlayers {
-		if addr.String() != senderAddr.String() {
-			conn.WriteToUDP([]byte(message+"\n"), addr)
+	for _, player := range connectedPlayers {
+		if player.Addr.String() != senderAddr.String() {
+			conn.WriteToUDP([]byte(message+"\n"), player.Addr)
 		}
 	}
 }
 
-func sendRandomPokemon(conn *net.UDPConn, addr *net.UDPAddr) {
-	// Read the Pokedex
-	pokedex, err := os.ReadFile(pokedexPath)
-	if err != nil {
-		fmt.Println("Error reading Pokedex:", err)
-		conn.WriteToUDP([]byte("Error reading Pokedex\n"), addr)
-		return
-	}
-
-	// Unmarshal the Pokedex
-	var pokedexJSON []Pokemon
-	err = json.Unmarshal(pokedex, &pokedexJSON)
-	if err != nil {
-		fmt.Println("Error unmarshalling Pokedex:", err)
-		conn.WriteToUDP([]byte("Error unmarshalling Pokedex\n"), addr)
-		return
-	}
+func sendRandomPokemon(pokedexJSON []model.Pokemon, conn *net.UDPConn, addr *net.UDPAddr) {
 
 	if len(pokedexJSON) == 0 {
 		fmt.Println("Pokedex is empty")
@@ -237,12 +249,8 @@ func sendRandomPokemon(conn *net.UDPConn, addr *net.UDPAddr) {
 	// Save the Pokémon to the player's inventory
 	playerName := findPlayerNameByAddr(addr)
 	mutex.Lock()
-	for name, playerAddr := range connectedPlayers {
-		if playerAddr.String() == addr.String() {
-			player := &Player{
-				Name:      name,
-				Inventory: []Pokemon{randomPokemon},
-			}
+	for _, player := range connectedPlayers {
+		if player.Addr.String() == addr.String() {
 			player.Inventory = append(player.Inventory, randomPokemon)
 			if err := SaveInventory(player); err != nil {
 				fmt.Printf("Error saving inventory for %s: %v\n", playerName, err)
@@ -261,13 +269,27 @@ func roundFloat(val float64, precision uint) float64 {
 	ratio := math.Pow(10, float64(precision))
 	return math.Round(val*ratio) / ratio
 }
+func CreatePlayertoJson(filename string, player *model.Player) {
+	updatedData, err := json.MarshalIndent(player, "", "  ")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	fmt.Println("Create New Player Inventory")
+	_, err = os.Create(filename)
+	if err != nil {
+		fmt.Println("Error...:", err)
+	}
+	if err = os.WriteFile(filename, updatedData, 0666); err != nil {
+		fmt.Println("Error ...... :", err)
+	}
 
+}
 func findPlayerNameByAddr(addr *net.UDPAddr) string {
 	mutex.Lock()
 	defer mutex.Unlock()
 
-	for name, playerAddr := range connectedPlayers {
-		if playerAddr.String() == addr.String() {
+	for name, player := range connectedPlayers {
+		if player.Addr.String() == addr.String() {
 			return name
 		}
 	}
@@ -275,9 +297,10 @@ func findPlayerNameByAddr(addr *net.UDPAddr) string {
 	return "Player not found"
 }
 
-func SaveInventory(player *Player) error {
-	filename := filepath.Join("Inventories", fmt.Sprintf("Player_%s_Inventory.json", player.Name))
-	data, err := json.MarshalIndent(player.Inventory, "", "  ")
+func SaveInventory(player *model.Player) error {
+	//filename := filepath.Join("Inventories", fmt.Sprintf("Player_%s_Inventory.json", player.Name))
+	filename := fmt.Sprintf(InventoryPath, player.Name)
+	data, err := json.MarshalIndent(player, "", " ")
 	if err != nil {
 		return fmt.Errorf("error marshalling inventory: %v", err)
 	}
@@ -290,22 +313,25 @@ func SaveInventory(player *Player) error {
 	return nil
 }
 
-func LoadInventory(player *Player) error {
-	filename := filepath.Join("Inventories", fmt.Sprintf("Player_%s_Inventory.json", player.Name))
-
+func LoadInventory(player *model.Player, addr *net.UDPAddr) error {
+	//filename := filepath.Join("Inventories", fmt.Sprintf("Player_%s_Inventory.json", player.Name))
+	filename := fmt.Sprintf(InventoryPath, player.Name)
 	data, err := os.ReadFile(filename)
+	demoaddr := addr.Port
 	if os.IsNotExist(err) {
-		player.Inventory = []Pokemon{}
+		player.Inventory = []model.Pokemon{}
 		fmt.Printf("No inventory file found for Player %s. Initialized empty inventory.\n", player.Name)
+		//Create Json File if new player
+		CreatePlayertoJson(filename, player)
 		return nil
 	} else if err != nil {
 		return fmt.Errorf("error reading inventory file: %v", err)
 	}
-
-	if err := json.Unmarshal(data, &player.Inventory); err != nil {
+	//If old player load data
+	if err := json.Unmarshal(data, &player); err != nil {
 		return fmt.Errorf("error unmarshalling inventory: %v", err)
 	}
-
 	fmt.Printf("Player %s inventory loaded from %s\n", player.Name, filename)
+	player.Addr.Port = demoaddr
 	return nil
 }
