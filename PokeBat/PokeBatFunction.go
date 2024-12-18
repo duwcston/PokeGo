@@ -198,6 +198,8 @@ func PrintPokemonInfo(index int, pokemon model.Pokemon) {
 		fmt.Println("\t\tElement:", element)
 	}
 	fmt.Println("\tEV:", pokemon.EV)
+	fmt.Println("\tLevel:", pokemon.Level)
+
 	fmt.Println("\tEvolutionLevel:", pokemon.EvolutionLevel)
 	fmt.Println("\tNextEvolution:", pokemon.NextEvolution)
 

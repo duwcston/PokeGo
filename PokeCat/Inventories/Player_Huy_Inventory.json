@@ -1,0 +1,403 @@
+{
+ "Name": "Huy",
+ "Addr": {
+  "IP": "127.0.0.1",
+  "Port": 53306,
+  "Zone": ""
+ },
+ "Inventory": [
+  {
+   "Name": "Golduck",
+   "Elements": [
+    "water"
+   ],
+   "Level": 5,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 80,
+    "Attack": 82,
+    "Defense": 78,
+    "Speed": 85,
+    "Sp_Attack": 95,
+    "Sp_Defense": 80
+   },
+   "Profile": {
+    "Height": 1.7,
+    "Weight": 76.6,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Water 1, Field",
+    "HatchSteps": 5100,
+    "Abilities": "Damp, Cloud-nine, Swift-swim"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Aqua jet",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Water sport",
+     "Element": "water",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Disable",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Tail whip",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Simipour",
+   "Elements": [
+    "water"
+   ],
+   "Level": 1,
+   "EV": 1,
+   "Stats": {
+    "HP": 75,
+    "Attack": 98,
+    "Defense": 63,
+    "Speed": 101,
+    "Sp_Attack": 98,
+    "Sp_Defense": 63
+   },
+   "Profile": {
+    "Height": 1,
+    "Weight": 29,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 87.5,
+     "FemaleRatio": 12.5
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Torrent, Gluttony"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Scald",
+     "Element": "water",
+     "Power": " 80",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Fury swipes",
+     "Element": "normal",
+     "Power": " 18",
+     "Acc": 80,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Lick",
+     "Element": "ghost",
+     "Power": " 30",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Weepinbell",
+   "Elements": [
+    "grass",
+    "poison"
+   ],
+   "Level": 8,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 65,
+    "Attack": 90,
+    "Defense": 50,
+    "Speed": 55,
+    "Sp_Attack": 85,
+    "Sp_Defense": 45
+   },
+   "Profile": {
+    "Height": 1,
+    "Weight": 6.4,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Grass",
+    "HatchSteps": 5100,
+    "Abilities": "Chlorophyll, Gluttony"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "Victreebel",
+   "Moves": [
+    {
+     "Name": "Growth",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Wrap",
+     "Element": "normal",
+     "Power": " 15",
+     "Acc": 90,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Vine whip",
+     "Element": "grass",
+     "Power": " 45",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    },
+    {
+     "Name": "Poisonpowder",
+     "Element": "poison",
+     "Power": " N/A",
+     "Acc": 75,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Luxio",
+   "Elements": [
+    "electric"
+   ],
+   "Level": 6,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 60,
+    "Attack": 85,
+    "Defense": 49,
+    "Speed": 60,
+    "Sp_Attack": 60,
+    "Sp_Defense": 49
+   },
+   "Profile": {
+    "Height": 0.9,
+    "Weight": 30.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Intimidate, Guts, Rivalry"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 30,
+   "NextEvolution": "Luxray",
+   "Moves": [
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Charge",
+     "Element": "electric",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Bite",
+     "Element": "dark",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  }
+ ]
+}

@@ -41,7 +41,8 @@ type Moves struct {
 type Pokemon struct {
 	Name               string               `json:"Name"`
 	Elements           []string             `json:"Elements"`
-	EV                 int                  `json:"EV"`
+	Level              int                  `json:"Level"`
+	EV                 float64              `json:"EV"`
 	Stats              Stats                `json:"Stats"`
 	Profile            Profile              `json:"Profile"`
 	DamegeWhenAttacked []DamegeWhenAttacked `json:"DamegeWhenAttacked"`
