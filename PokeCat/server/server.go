@@ -68,6 +68,7 @@ type Pokemon struct {
 type Player struct {
 	Name      string    `json:"Name"`
 	Inventory []Pokemon `json:"Inventory"`
+	Pokeball  int       `json:"Pokeball"`
 }
 
 const (
@@ -160,6 +161,7 @@ func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPA
 	player := &Player{
 		Name:      playerName,
 		Inventory: []Pokemon{},
+		Pokeball:  10,
 	}
 
 	// Load player's inventory

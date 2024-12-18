@@ -14,10 +14,10 @@
         },
         "pokeworld100.json": {
             "scale": 0.33,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": -134.84848484848476,
-                "y": 677.2727272727274
+                "x": 50,
+                "y": 1077.2727272727275
             }
         }
     },
