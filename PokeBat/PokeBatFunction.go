@@ -4,6 +4,7 @@ import (
 	"PokeGo/model"
 	"crypto/rand"
 	"fmt"
+	"math"
 	"math/big"
 	"net"
 	"reflect"
@@ -15,7 +16,7 @@ func PlayerMove(player1Pokemon, player2Pokemon *model.Pokemon, player1Pokemons *
 	if !isAlive(player1Pokemon) {
 		fmt.Println(player1Pokemon.Name, "is dead")
 		conn.WriteToUDP([]byte(fmt.Sprintf("%s is dead\n", player1Pokemon.Name)), addr1)
-		player1Pokemon = switchPokemon(*player1Pokemons, conn, addr1)
+		player1Pokemon = switchPokemon(*player1Pokemons)
 		if player1Pokemon == nil {
 			fmt.Println(PlayerName + "has no pokemon left")
 			fmt.Println(PlayerName + " lost")
@@ -44,7 +45,6 @@ func PlayerMove(player1Pokemon, player2Pokemon *model.Pokemon, player1Pokemons *
 		conn.WriteToUDP([]byte("You surrender to Enemy. You lost.\n"), addr1)
 		conn.WriteToUDP([]byte("Enemy surrenders. You wins.\n"), addr2)
 		return player1Pokemon, true
-		break
 	case "?":
 		displayCommandsList(conn, addr1)
 	}
@@ -89,8 +89,8 @@ func attack(attacker *model.Pokemon, defender *model.Pokemon, conn *net.UDPConn,
 		dmg = float32(attacker.Stats.Sp_Attack)*highestCoefficient - float32(defender.Stats.Sp_Defense)
 	}
 
-	if dmg < 0 {
-		dmg = 0
+	if dmg <= 0 {
+		dmg = float32(math.Max(float64(attacker.Stats.Attack-defender.Stats.Defense), float64(attacker.Stats.Attack/2)))
 	}
 
 	defender.Stats.HP -= int(dmg)
@@ -132,7 +132,7 @@ func isAlive(pokemon *model.Pokemon) bool {
 	return pokemon.Stats.HP > 0
 }
 
-func switchPokemon(pokemonsList []model.Pokemon, conn *net.UDPConn, addr *net.UDPAddr) *model.Pokemon {
+func switchPokemon(pokemonsList []model.Pokemon) *model.Pokemon {
 	for i := 0; i < len(pokemonsList); i++ {
 		if isAlive(&pokemonsList[i]) {
 			return &pokemonsList[i]
@@ -158,7 +158,7 @@ func displaySelectedPokemons(pokemonsList []model.Pokemon, conn *net.UDPConn, ad
 
 func switchToChosenPokemon(pokemonsList []model.Pokemon, conn *net.UDPConn, addr *net.UDPAddr) *model.Pokemon {
 	for {
-		index := readIndex(conn, addr)
+		index := readIndex(conn)
 		if index < 0 || index >= len(pokemonsList) {
 			conn.WriteToUDP([]byte("Please enter a valid index.\n"), addr)
 			continue
@@ -182,7 +182,7 @@ func readCommands(conn *net.UDPConn, addr *net.UDPAddr) string {
 	return readCommands(conn, addr)
 }
 
-func readIndex(conn *net.UDPConn, addr *net.UDPAddr) int {
+func readIndex(conn *net.UDPConn) int {
 	buffer := make([]byte, 1024)
 	n, _, _ := conn.ReadFromUDP(buffer)
 	input := strings.TrimSpace(string(buffer[:n]))
@@ -220,7 +220,7 @@ func PrintPokemonInfo(index int, pokemon model.Pokemon) {
 func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *[]model.Pokemon {
 	var selectedPokemons = []model.Pokemon{}
 	msg := player.Name + " please select 3 pokemons from:\n"
-	fmt.Printf(msg)
+	fmt.Printf("%s", msg)
 	_, err := conn.WriteToUDP([]byte(msg), addr)
 	if err != nil {
 		return nil
@@ -239,7 +239,7 @@ func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *
 			break
 		}
 		conn.WriteToUDP([]byte(fmt.Sprintf("Enter the index of the %d pokemon you want to select: ", counter)), addr)
-		index := readIndex(conn, addr)
+		index := readIndex(conn)
 		if index < 0 || index >= len(player.Inventory) {
 			conn.WriteToUDP([]byte("Invalid index\n"), addr)
 			continue

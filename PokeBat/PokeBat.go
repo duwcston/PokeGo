@@ -121,7 +121,7 @@ func LevelUpPokemon(Pokemons []model.Pokemon, BattlePokemon []model.Pokemon) []m
 	for _, pokemon := range BattlePokemon {
 		BattlePokemonName = append(BattlePokemonName, pokemon.Name)
 	}
-	for i, _ := range Pokemons {
+	for i := range Pokemons {
 		if isContain(BattlePokemonName, Pokemons[i].Name) {
 			Pokemons[i].Level += 20
 		}

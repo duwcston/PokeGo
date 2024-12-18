@@ -1,0 +1,519 @@
+{
+ "Name": "Toan",
+ "Addr": {
+  "IP": "127.0.0.1",
+  "Port": 58251,
+  "Zone": ""
+ },
+ "Inventory": [
+  {
+   "Name": "Seaking",
+   "Elements": [
+    "water"
+   ],
+   "Level": 27,
+   "EV": 0.9,
+   "Stats": {
+    "HP": 80,
+    "Attack": 92,
+    "Defense": 65,
+    "Speed": 68,
+    "Sp_Attack": 65,
+    "Sp_Defense": 80
+   },
+   "Profile": {
+    "Height": 1.3,
+    "Weight": 39,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Water 2",
+    "HatchSteps": 5100,
+    "Abilities": "Lightningrod, Swift-swim, Water-veil"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Poison jab",
+     "Element": "poison",
+     "Power": " 80",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Water sport",
+     "Element": "water",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Peck",
+     "Element": "flying",
+     "Power": " 35",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Supersonic",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 55,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Garchomp",
+   "Elements": [
+    "dragon",
+    "ground"
+   ],
+   "Level": 26,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 108,
+    "Attack": 130,
+    "Defense": 95,
+    "Speed": 102,
+    "Sp_Attack": 80,
+    "Sp_Defense": 85
+   },
+   "Profile": {
+    "Height": 1.9,
+    "Weight": 95,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Monster, Dragon",
+    "HatchSteps": 10200,
+    "Abilities": "Sand-veil, Rough-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ice",
+     "Coefficient": 4
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 2
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Fire fang",
+     "Element": "fire",
+     "Power": " 65",
+     "Acc": 95,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Sandstorm",
+     "Element": "rock",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Dragon rage",
+     "Element": "dragon",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Garbodor",
+   "Elements": [
+    "poison"
+   ],
+   "Level": 41,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 80,
+    "Attack": 95,
+    "Defense": 82,
+    "Speed": 75,
+    "Sp_Attack": 60,
+    "Sp_Defense": 82
+   },
+   "Profile": {
+    "Height": 1.9,
+    "Weight": 107.3,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Mineral",
+    "HatchSteps": 5100,
+    "Abilities": "Stench, Aftermath, Weak-armor"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Toxic spikes",
+     "Element": "poison",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Recycle",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Poison gas",
+     "Element": "poison",
+     "Power": " N/A",
+     "Acc": 90,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Pound",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Braviary",
+   "Elements": [
+    "flying",
+    "normal"
+   ],
+   "Level": 29,
+   "EV": 0.7,
+   "Stats": {
+    "HP": 100,
+    "Attack": 123,
+    "Defense": 75,
+    "Speed": 80,
+    "Sp_Attack": 57,
+    "Sp_Defense": 75
+   },
+   "Profile": {
+    "Height": 1.5,
+    "Weight": 41,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 100,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "Flying",
+    "HatchSteps": 5100,
+    "Abilities": "Keen-eye, Sheer-force, Defiant"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Peck",
+     "Element": "flying",
+     "Power": " 35",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Fury attack",
+     "Element": "normal",
+     "Power": " 15",
+     "Acc": 85,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Wing attack",
+     "Element": "flying",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Staraptor",
+   "Elements": [
+    "flying",
+    "normal"
+   ],
+   "Level": 29,
+   "EV": 1,
+   "Stats": {
+    "HP": 85,
+    "Attack": 120,
+    "Defense": 70,
+    "Speed": 100,
+    "Sp_Attack": 50,
+    "Sp_Defense": 60
+   },
+   "Profile": {
+    "Height": 1.2,
+    "Weight": 24.9,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Flying",
+    "HatchSteps": 3825,
+    "Abilities": "Intimidate, Reckless"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Quick attack",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Growl",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Wing attack",
+     "Element": "flying",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  }
+ ]
+}

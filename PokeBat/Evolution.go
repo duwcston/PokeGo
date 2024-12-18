@@ -7,7 +7,7 @@ import (
 )
 
 func EvolutionProcess(winner model.Player, Pokemon []model.Pokemon, AllPokemons []model.Pokemon, conn *net.UDPConn) {
-	for i, _ := range Pokemon {
+	for i := range Pokemon {
 		if Pokemon[i].Level >= Pokemon[i].EvolutionLevel && Pokemon[i].NextEvolution != "" {
 			conn.WriteToUDP([]byte(fmt.Sprintf("%s  evolves into %s\n", Pokemon[i].Name, Pokemon[i].NextEvolution)), winner.Addr)
 			Pokemon[i] = Evolution(Pokemon[i], AllPokemons)

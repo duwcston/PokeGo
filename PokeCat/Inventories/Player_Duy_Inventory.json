@@ -2,7 +2,7 @@
  "Name": "Duy",
  "Addr": {
   "IP": "127.0.0.1",
-  "Port": 55819,
+  "Port": 63845,
   "Zone": ""
  },
  "Inventory": [
@@ -315,7 +315,7 @@
     "grass",
     "fighting"
    ],
-   "Level": 26,
+   "Level": 46,
    "EV": 0.9,
    "Stats": {
     "HP": 60,
@@ -430,7 +430,7 @@
     "rock",
     "ground"
    ],
-   "Level": 0,
+   "Level": 20,
    "EV": 0.8,
    "Stats": {
     "HP": 80,
@@ -544,7 +544,7 @@
    "Elements": [
     "grass"
    ],
-   "Level": 4,
+   "Level": 24,
    "EV": 0.8,
    "Stats": {
     "HP": 45,
@@ -1149,6 +1149,284 @@
      "Power": " 40",
      "Acc": 100,
      "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Entei",
+   "Elements": [
+    "fire"
+   ],
+   "Level": 7,
+   "EV": 0.5,
+   "Stats": {
+    "HP": 115,
+    "Attack": 115,
+    "Defense": 85,
+    "Speed": 100,
+    "Sp_Attack": 90,
+    "Sp_Defense": 75
+   },
+   "Profile": {
+    "Height": 2.1,
+    "Weight": 198,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 0,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "No Eggs",
+    "HatchSteps": 20400,
+    "Abilities": "Flash-fire, Pressure"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Bite",
+     "Element": "dark",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Ember",
+     "Element": "fire",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    },
+    {
+     "Name": "Roar",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Luxio",
+   "Elements": [
+    "electric"
+   ],
+   "Level": 6,
+   "EV": 0.5,
+   "Stats": {
+    "HP": 60,
+    "Attack": 85,
+    "Defense": 49,
+    "Speed": 60,
+    "Sp_Attack": 60,
+    "Sp_Defense": 49
+   },
+   "Profile": {
+    "Height": 0.9,
+    "Weight": 30.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Intimidate, Guts, Rivalry"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 30,
+   "NextEvolution": "Luxray",
+   "Moves": [
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Charge",
+     "Element": "electric",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Bite",
+     "Element": "dark",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Electivire",
+   "Elements": [
+    "electric"
+   ],
+   "Level": 3,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 75,
+    "Attack": 123,
+    "Defense": 67,
+    "Speed": 95,
+    "Sp_Attack": 95,
+    "Sp_Defense": 85
+   },
+   "Profile": {
+    "Height": 1.8,
+    "Weight": 138.6,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 75,
+     "FemaleRatio": 25
+    },
+    "EggGroup": "Human-Like",
+    "HatchSteps": 6375,
+    "Abilities": "Vital-spirit, Motor-drive"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Quick attack",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Thundershock",
+     "Element": "electric",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Low kick",
+     "Element": "fighting",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
      "Description": ""
     }
    ]

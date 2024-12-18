@@ -173,10 +173,6 @@ func getAllPokemons(filename string) (*[]model.Pokemon, error) {
 }
 
 func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPAddr) {
-	mutex.Lock()
-
-	mutex.Unlock()
-
 	fmt.Printf("Player '%s' connected from %s\n", playerName, addr)
 
 	conn.WriteToUDP([]byte("Welcome "+playerName+"!\n"), addr)
