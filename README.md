@@ -1,6 +1,6 @@
 # PokeGo
 
-A Pokemon simulator game with turn-based battle play. Written in [Go](https://golang.org) using [Ebitengine](https://ebiten.org) and UDP Protocol for communicating.
+A Pokemon simulator game with turn-based battle. Written in [Go](https://golang.org) using [Ebitengine](https://ebiten.org) and UDP Protocol for communicating.
 
 ## Requirements
 
