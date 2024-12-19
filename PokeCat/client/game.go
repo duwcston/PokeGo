@@ -40,6 +40,9 @@ type Game struct {
 	isAutoMoveEnabled bool
 	moveTimer         time.Duration
 	lastMoveTime      time.Time
+
+	// Access pokestop
+	isAccessedPokestop bool
 }
 
 var (
@@ -131,6 +134,8 @@ func NewGame() *Game {
 		isAutoMoveEnabled: false,
 		moveTimer:         time.Second, // Move every second
 		lastMoveTime:      time.Now(),  // Track the last move time
+
+		isAccessedPokestop: false,
 	}
 }
 
@@ -199,6 +204,20 @@ func (g *Game) Update() error {
 			g.serverConn.Write([]byte("gotcha\n"))
 			g.pokeball = append(g.pokeball[:i], g.pokeball[i+1:]...)
 		}
+	}
+
+	// Access pokestop to get pokeballs and berries
+	if !g.isAccessedPokestop && !g.isAutoMoveEnabled && ((int(g.player.X) >= constants.Tilesize*20-5 && int(g.player.X) <= constants.Tilesize*20+5) &&
+		(int(g.player.Y) >= constants.Tilesize*22-5 && int(g.player.Y) <= constants.Tilesize*22+5) ||
+		(int(g.player.X) >= constants.Tilesize*20-5 && int(g.player.X) <= constants.Tilesize*20+5) &&
+			(int(g.player.Y) >= constants.Tilesize*82-5 && int(g.player.Y) <= constants.Tilesize*82+5) ||
+		(int(g.player.X) >= constants.Tilesize*80-5 && int(g.player.X) <= constants.Tilesize*80+5) &&
+			(int(g.player.Y) >= constants.Tilesize*22-5 && int(g.player.Y) <= constants.Tilesize*22+5) ||
+		(int(g.player.X) >= constants.Tilesize*80-5 && int(g.player.X) <= constants.Tilesize*80+5) &&
+			(int(g.player.Y) >= constants.Tilesize*82-5 && int(g.player.Y) <= constants.Tilesize*82+5)) {
+		fmt.Println("Pokestop accessed!")
+		g.serverConn.Write([]byte("pokestop\n"))
+		g.isAccessedPokestop = true
 	}
 
 	g.camera.FollowPlayer(g.player.X+constants.Tilesize/2, g.player.Y+constants.Tilesize/2, constants.ScreenWidth, constants.ScreenHeight)

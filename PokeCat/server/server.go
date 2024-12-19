@@ -103,6 +103,34 @@ func main() {
 				sendRandomPokemon(*AllPokemons, conn, clientAddr)
 				continue
 			}
+
+			if message == "pokestop" {
+				response := "Choose an option:\n1. Revive all Pokemons\n2. Get Pokeballs\n3. Exit PokeStop\n"
+				conn.WriteToUDP([]byte(response), clientAddr)
+				n, _, err := conn.ReadFromUDP(buffer)
+				if err != nil {
+					fmt.Println("Error reading:", err)
+					continue
+				}
+				option := strings.TrimSpace(string(buffer[:n]))
+				switch option {
+				case "1":
+					for i := range Sender.Inventory {
+						// Revive the HP of all Pokemons to the maxHP
+						Sender.Inventory[i].Stats.HP = 100
+					}
+					conn.WriteToUDP([]byte("All your Pokemons have been revived.\n"), clientAddr)
+				case "2":
+					Sender.Pokeballs += 5
+					conn.WriteToUDP([]byte("You received 5 Pokeballs.\n"), clientAddr)
+				case "3":
+					conn.WriteToUDP([]byte("Exited PokeStop.\n"), clientAddr)
+				default:
+					conn.WriteToUDP([]byte("Invalid option.\n"), clientAddr)
+				}
+				continue
+			}
+
 			if message == "Inventory" {
 				for _, inv := range Sender.Inventory {
 					inventoryDetails := fmt.Sprintf("Player Inventory: Name: %s, Level: %d", inv.Name, inv.Level)
@@ -113,6 +141,7 @@ func main() {
 				}
 				continue
 			}
+
 			if strings.HasPrefix(message, "@") {
 				msg := ""
 				parts := strings.SplitN(message, " ", 2)
@@ -183,6 +212,7 @@ func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPA
 	player := &model.Player{
 		Name:      playerName,
 		Addr:      addr,
+		Pokeballs: 1,
 		Inventory: []model.Pokemon{},
 	}
 	connectedPlayers[playerName] = player
