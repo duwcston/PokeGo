@@ -94,6 +94,9 @@ func attack(attacker *model.Pokemon, defender *model.Pokemon, conn *net.UDPConn,
 	}
 
 	defender.Stats.HP -= int(dmg)
+	if defender.Stats.HP < 0 {
+		defender.Stats.HP = 0
+	}
 	fmt.Println(attacker.Name, "attacked", defender.Name, "with", attackerMove, "and dealt", dmg, "damage", defender.Stats.HP, "HP left")
 	conn.WriteToUDP([]byte(fmt.Sprintf("%s attacked %s with %s and dealt %.2f damage %d HP left\n", attacker.Name, defender.Name, attackerMove, dmg, defender.Stats.HP)), addr)
 }
@@ -247,6 +250,11 @@ func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *
 
 		if isContain(selectedPokemons, player.Inventory[index]) {
 			conn.WriteToUDP([]byte("You have selected this pokemon. Please select another one.\n"), addr)
+			continue
+		}
+
+		if !isAlive(&player.Inventory[index]) {
+			conn.WriteToUDP([]byte("This pokemon is unable to battle. Please select another one.\n"), addr)
 			continue
 		}
 
