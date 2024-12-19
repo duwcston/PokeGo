@@ -253,6 +253,11 @@ func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *
 			continue
 		}
 
+		if !isAlive(&player.Inventory[index]) {
+			conn.WriteToUDP([]byte("This pokemon is unable to battle. Please select another one.\n"), addr)
+			continue
+		}
+
 		conn.WriteToUDP([]byte(fmt.Sprintf("Selected %s\n", player.Inventory[index].Name)), addr)
 		counter++
 		selectedPokemons = append(selectedPokemons, player.Inventory[index])

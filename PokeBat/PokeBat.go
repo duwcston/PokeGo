@@ -35,6 +35,20 @@ func Battle(player1, player2 *model.Player, AllPokemons []model.Pokemon, conn *n
 			return nil, nil
 		}
 		return nil, nil
+	} else if !hasEnoughHealthyPokemons(player1.Inventory) {
+		fmt.Println("Player 1 does not have enough pokemons")
+		_, err := conn.WriteToUDP([]byte("Your pokemons are unable to battle"), addr1)
+		if err != nil {
+			return nil, nil
+		}
+		return nil, nil
+	} else if !hasEnoughHealthyPokemons(player2.Inventory) {
+		fmt.Println("Player 2 does not have enough pokemons")
+		_, err := conn.WriteToUDP([]byte("Your pokemons are unable to battle"), addr2)
+		if err != nil {
+			return nil, nil
+		}
+		return nil, nil
 	}
 
 	// Player 1 select 3 Pokemons
@@ -146,4 +160,14 @@ func LevelUpPokemon(Pokemons []model.Pokemon, BattlePokemon []model.Pokemon) []m
 		}
 	}
 	return Pokemons
+}
+
+func hasEnoughHealthyPokemons(pokemons []model.Pokemon) bool {
+	count := 0
+	for _, pokemon := range pokemons {
+		if pokemon.Stats.HP > 0 {
+			count++
+		}
+	}
+	return count >= 3
 }
