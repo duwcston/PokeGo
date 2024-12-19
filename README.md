@@ -8,7 +8,7 @@ A Pokemon simulator game with turn-based battle play. Written in [Go](https://go
 
 ## Development
 
-All commands must be run from the ../PokeGo/PokeCat directory.
+All commands must be run from the `../PokeGo/PokeCat` directory.
 
 Start the server, go to `server` folder:
 
