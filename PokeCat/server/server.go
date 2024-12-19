@@ -105,7 +105,7 @@ func main() {
 			}
 			if message == "Inventory" {
 				for _, inv := range Sender.Inventory {
-					inventoryDetails := fmt.Sprintf("Player Inventory: Name: %s, Level: %d", inv.Name, inv.Level)
+					inventoryDetails := fmt.Sprintf("Player Inventory: Name: %s, Level: %d, HP: %d", inv.Name, inv.Level, inv.Stats.HP)
 					_, err := conn.WriteToUDP([]byte(inventoryDetails), Sender.Addr)
 					if err != nil {
 						fmt.Println("Error sending connect message to client:", err)
@@ -132,18 +132,33 @@ func main() {
 					privateMsg := fmt.Sprintf("Bat from %s: %s", Sender.Name, msg)
 					conn.WriteToUDP([]byte(privateMsg), Receiver.Addr)
 					IsInBattel = true
-					winner, LevelUpPokemons := PokeBat.Battle(Sender, Receiver, conn, Sender.Addr, Receiver.Addr)
+					SenderResult, ReceiverResult := PokeBat.Battle(Sender, Receiver, *AllPokemons, conn, Sender.Addr, Receiver.Addr)
 					IsInBattel = false
-					// Evolution
-					if LevelUpPokemons != nil {
-						PokeBat.EvolutionProcess(*connectedPlayers[winner], LevelUpPokemons, *AllPokemons, conn)
-						if err := SaveInventory(Sender); err != nil {
-							fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
-							conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
-							mutex.Unlock()
-							return
-						}
+					connectedPlayers[SenderResult.Name].Inventory = SenderResult.Inventory
+					connectedPlayers[ReceiverResult.Name].Inventory = ReceiverResult.Inventory
+					if err := SaveInventory(Sender); err != nil {
+						fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
+						conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
+						mutex.Unlock()
+						return
 					}
+					if err := SaveInventory(Receiver); err != nil {
+						fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
+						conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
+						mutex.Unlock()
+						return
+					}
+
+					// Evolution
+					//if LevelUpPokemons != nil {
+					//	PokeBat.EvolutionProcess(*connectedPlayers[winner], LevelUpPokemons, *AllPokemons, conn)
+					//	if err := SaveInventory(Sender); err != nil {
+					//		fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
+					//		conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
+					//		mutex.Unlock()
+					//		return
+					//	}
+					//}
 					continue
 				} else {
 					conn.WriteToUDP([]byte("User "+target+" not found"), Sender.Addr)
