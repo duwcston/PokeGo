@@ -2,7 +2,7 @@
  "Name": "Ton",
  "Addr": {
   "IP": "127.0.0.1",
-  "Port": 53358,
+  "Port": 52592,
   "Zone": ""
  },
  "Inventory": [
@@ -117,7 +117,7 @@
    "Elements": [
     "dark"
    ],
-   "Level": 61,
+   "Level": 81,
    "EV": 0.9,
    "Stats": {
     "HP": 70,
@@ -208,7 +208,7 @@
     "rock",
     "ground"
    ],
-   "Level": 100,
+   "Level": 120,
    "EV": 0.8,
    "Stats": {
     "HP": 80,
@@ -323,7 +323,7 @@
     "ice",
     "flying"
    ],
-   "Level": 42,
+   "Level": 62,
    "EV": 0.9,
    "Stats": {
     "HP": 90,

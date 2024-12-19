@@ -2,7 +2,7 @@
  "Name": "Huy",
  "Addr": {
   "IP": "127.0.0.1",
-  "Port": 53306,
+  "Port": 55517,
   "Zone": ""
  },
  "Inventory": [
@@ -109,7 +109,7 @@
    "Elements": [
     "water"
    ],
-   "Level": 1,
+   "Level": 21,
    "EV": 1,
    "Stats": {
     "HP": 75,
@@ -203,24 +203,24 @@
    ]
   },
   {
-   "Name": "Weepinbell",
+   "Name": "Victreebel",
    "Elements": [
     "grass",
     "poison"
    ],
-   "Level": 8,
-   "EV": 0.8,
+   "Level": 28,
+   "EV": 0,
    "Stats": {
-    "HP": 65,
-    "Attack": 90,
-    "Defense": 50,
-    "Speed": 55,
-    "Sp_Attack": 85,
-    "Sp_Defense": 45
+    "HP": 80,
+    "Attack": 105,
+    "Defense": 65,
+    "Speed": 70,
+    "Sp_Attack": 100,
+    "Sp_Defense": 70
    },
    "Profile": {
-    "Height": 1,
-    "Weight": 6.4,
+    "Height": 1.7,
+    "Weight": 15.5,
     "CatchRate": 0,
     "GenderRatio": {
      "MaleRatio": 50,
@@ -273,10 +273,26 @@
     }
    ],
    "EvolutionLevel": 0,
-   "NextEvolution": "Victreebel",
+   "NextEvolution": "",
    "Moves": [
     {
-     "Name": "Growth",
+     "Name": "Swallow",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Spit up",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Stockpile",
      "Element": "normal",
      "Power": " N/A",
      "Acc": 0,
@@ -284,27 +300,11 @@
      "Description": ""
     },
     {
-     "Name": "Wrap",
+     "Name": "Sweet scent",
      "Element": "normal",
-     "Power": " 15",
-     "Acc": 90,
-     "PP": 20,
-     "Description": ""
-    },
-    {
-     "Name": "Vine whip",
-     "Element": "grass",
-     "Power": " 45",
-     "Acc": 100,
-     "PP": 25,
-     "Description": ""
-    },
-    {
-     "Name": "Poisonpowder",
-     "Element": "poison",
      "Power": " N/A",
-     "Acc": 75,
-     "PP": 35,
+     "Acc": 100,
+     "PP": 20,
      "Description": ""
     }
    ]
@@ -314,7 +314,7 @@
    "Elements": [
     "electric"
    ],
-   "Level": 6,
+   "Level": 26,
    "EV": 0.8,
    "Stats": {
     "HP": 60,

@@ -22,7 +22,7 @@ func EvolutionProcess(winner model.Player, Pokemon []model.Pokemon, AllPokemons 
 func Evolution(EVPokemon model.Pokemon, AllPokemons []model.Pokemon) model.Pokemon {
 	for _, pokemon := range AllPokemons {
 		if EVPokemon.NextEvolution == pokemon.Name {
-			pokemon.EV = EVPokemon.EV
+			pokemon.Level = EVPokemon.Level
 			return pokemon
 		}
 	}
