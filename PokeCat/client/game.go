@@ -49,7 +49,7 @@ var (
 	pokeballImg, _, _ = ebitenutil.NewImageFromFile("../../assets/images/pokeball.png")
 )
 
-func NewGame() *Game {
+func NewGame(conn *net.UDPConn) *Game {
 	playerImg, _, err := ebitenutil.NewImageFromFile("../../assets/images/Char_001.png")
 	if err != nil {
 		log.Fatal(err)
@@ -141,6 +141,9 @@ func NewGame() *Game {
 
 func (g *Game) Update() error {
 	// fmt.Println("Player X:", int(g.player.X), "Player Y:", int(g.player.Y))
+	if g.isAccessedPokestop {
+		return nil
+	}
 
 	if g.isAutoMoveEnabled && time.Since(g.lastMoveTime) >= g.moveTimer {
 		randomDirection := rand.Intn(4)
@@ -200,21 +203,21 @@ func (g *Game) Update() error {
 		pokeball := g.pokeball[i]
 		if (int(g.player.X) >= int(pokeball.X)-10 && int(g.player.X) <= int(pokeball.X)+10) &&
 			(int(g.player.Y) >= int(pokeball.Y)-10 && int(g.player.Y) <= int(pokeball.Y)+10) {
-			fmt.Println("Pokeball collected!")
+			fmt.Println("Try to catch a pokemon...")
 			g.serverConn.Write([]byte("gotcha\n"))
 			g.pokeball = append(g.pokeball[:i], g.pokeball[i+1:]...)
 		}
 	}
 
 	// Access pokestop to get pokeballs and berries
-	if !g.isAccessedPokestop && !g.isAutoMoveEnabled && ((int(g.player.X) >= constants.Tilesize*20-5 && int(g.player.X) <= constants.Tilesize*20+5) &&
-		(int(g.player.Y) >= constants.Tilesize*22-5 && int(g.player.Y) <= constants.Tilesize*22+5) ||
-		(int(g.player.X) >= constants.Tilesize*20-5 && int(g.player.X) <= constants.Tilesize*20+5) &&
-			(int(g.player.Y) >= constants.Tilesize*82-5 && int(g.player.Y) <= constants.Tilesize*82+5) ||
-		(int(g.player.X) >= constants.Tilesize*80-5 && int(g.player.X) <= constants.Tilesize*80+5) &&
-			(int(g.player.Y) >= constants.Tilesize*22-5 && int(g.player.Y) <= constants.Tilesize*22+5) ||
-		(int(g.player.X) >= constants.Tilesize*80-5 && int(g.player.X) <= constants.Tilesize*80+5) &&
-			(int(g.player.Y) >= constants.Tilesize*82-5 && int(g.player.Y) <= constants.Tilesize*82+5)) {
+	if !g.isAccessedPokestop && !g.isAutoMoveEnabled && ((int(g.player.X) >= constants.Tilesize*20-1 && int(g.player.X) <= constants.Tilesize*20+1) &&
+		(int(g.player.Y) >= constants.Tilesize*22-1 && int(g.player.Y) <= constants.Tilesize*22+1) ||
+		(int(g.player.X) >= constants.Tilesize*20-1 && int(g.player.X) <= constants.Tilesize*20+1) &&
+			(int(g.player.Y) >= constants.Tilesize*82-1 && int(g.player.Y) <= constants.Tilesize*82+1) ||
+		(int(g.player.X) >= constants.Tilesize*80-1 && int(g.player.X) <= constants.Tilesize*80+1) &&
+			(int(g.player.Y) >= constants.Tilesize*22-1 && int(g.player.Y) <= constants.Tilesize*22+1) ||
+		(int(g.player.X) >= constants.Tilesize*79-2 && int(g.player.X) <= constants.Tilesize*79+2) &&
+			(int(g.player.Y) >= constants.Tilesize*81-2 && int(g.player.Y) <= constants.Tilesize*81+2)) {
 		fmt.Println("Pokestop accessed!")
 		g.serverConn.Write([]byte("pokestop\n"))
 		g.isAccessedPokestop = true
@@ -329,6 +332,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		}
 		return "OFF"
 	}()))
+
+	ebitenutil.DebugPrint(screen, "\nisAccessedPokestop: "+fmt.Sprint(g.isAccessedPokestop)) // Debug print for accessing pokestop
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

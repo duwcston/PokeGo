@@ -30,7 +30,7 @@ const (
 var (
 	connectedPlayers = make(map[string]*model.Player)
 	mutex            = sync.Mutex{}
-	IsInBattel       = false
+	IsInBattle       = false
 	AllPokemons      *[]model.Pokemon
 )
 
@@ -62,6 +62,7 @@ func main() {
 		fmt.Println("Received signal:", sig)
 		handleServerShutdown(conn)
 	}()
+
 	AllPokemons, err = getAllPokemons(pokedexPath)
 	if err != nil {
 		fmt.Println("Error resolving address: ", err)
@@ -69,7 +70,7 @@ func main() {
 	}
 	buffer := make([]byte, 1024)
 	for {
-		if !IsInBattel {
+		if !IsInBattle {
 			// Read incoming message
 			n, clientAddr, err := conn.ReadFromUDP(buffer)
 			if err != nil {
@@ -105,40 +106,45 @@ func main() {
 			}
 
 			if message == "pokestop" {
-				response := "Choose an option:\n1. Revive all Pokemons\n2. Get Pokeballs\n3. Exit PokeStop\n"
+				response := "Choose an option:\n1. Revive all Pokemons\n2. Get Pokeballs\n"
 				conn.WriteToUDP([]byte(response), clientAddr)
 				n, _, err := conn.ReadFromUDP(buffer)
 				if err != nil {
 					fmt.Println("Error reading:", err)
-					continue
+					break
 				}
 				option := strings.TrimSpace(string(buffer[:n]))
 				switch option {
 				case "1":
 					for i := range Sender.Inventory {
-						// Revive the HP of all Pokemons to the maxHP
-						Sender.Inventory[i].Stats.HP = 100
+						Sender.Inventory[i].Stats.HP = rand.Intn(50) + 50 // It should be the max HP of the Pokemon!
 					}
-					conn.WriteToUDP([]byte("All your Pokemons have been revived.\n"), clientAddr)
+					conn.WriteToUDP([]byte("All your Pokemons have been revived.\n"), Sender.Addr)
+					conn.WriteToUDP([]byte("Exited PokeStop.\n"), Sender.Addr)
+					continue
 				case "2":
 					Sender.Pokeballs += 5
-					conn.WriteToUDP([]byte("You received 5 Pokeballs.\n"), clientAddr)
-				case "3":
-					conn.WriteToUDP([]byte("Exited PokeStop.\n"), clientAddr)
+					conn.WriteToUDP([]byte("You received 5 Pokeballs.\n"), Sender.Addr)
+					conn.WriteToUDP([]byte("Exited PokeStop.\n"), Sender.Addr)
+					continue
 				default:
-					conn.WriteToUDP([]byte("Invalid option.\n"), clientAddr)
+					conn.WriteToUDP([]byte("Invalid option.\n"), Sender.Addr)
 				}
 				continue
 			}
 
 			if message == "Inventory" {
 				for _, inv := range Sender.Inventory {
-					inventoryDetails := fmt.Sprintf("Player Inventory: Name: %s, Level: %d, HP: %d", inv.Name, inv.Level, inv.Stats.HP)
+					playerName := findPlayerNameByAddr(clientAddr)
+					inventoryDetails := fmt.Sprintf(playerName+"'s Inventory: Name: %s, Level: %d, HP: %d", inv.Name, inv.Level, inv.Stats.HP)
 					_, err := conn.WriteToUDP([]byte(inventoryDetails), Sender.Addr)
 					if err != nil {
 						fmt.Println("Error sending connect message to client:", err)
 					}
 				}
+				totalPokemons := len(Sender.Inventory)
+				conn.WriteToUDP([]byte(fmt.Sprintf("Total Pokemons: %d", totalPokemons)), Sender.Addr)
+				conn.WriteToUDP([]byte(fmt.Sprintf("Pokeballs: %d\n", Sender.Pokeballs)), Sender.Addr)
 				continue
 			}
 
@@ -158,11 +164,11 @@ func main() {
 				}
 				// Private message to specific user
 				if Receiver, ok := connectedPlayers[target]; ok {
-					privateMsg := fmt.Sprintf("Bat from %s: %s", Sender.Name, msg)
+					privateMsg := fmt.Sprintf("Battle from %s: %s", Sender.Name, msg)
 					conn.WriteToUDP([]byte(privateMsg), Receiver.Addr)
-					IsInBattel = true
+					IsInBattle = true
 					SenderResult, ReceiverResult := PokeBat.Battle(Sender, Receiver, *AllPokemons, conn, Sender.Addr, Receiver.Addr)
-					IsInBattel = false
+					IsInBattle = false
 					connectedPlayers[SenderResult.Name].Inventory = SenderResult.Inventory
 					connectedPlayers[ReceiverResult.Name].Inventory = ReceiverResult.Inventory
 					if err := SaveInventory(Sender); err != nil {
@@ -253,7 +259,6 @@ func handleServerShutdown(conn *net.UDPConn) {
 	for _, player := range connectedPlayers {
 		conn.WriteToUDP([]byte("Server is shutting down\n"), player.Addr)
 	}
-
 	conn.Close()
 	os.Exit(0)
 }
@@ -284,12 +289,25 @@ func sendRandomPokemon(pokedexJSON []model.Pokemon, conn *net.UDPConn, addr *net
 	randomPokemon.Level = rand.Intn(10) + 1
 
 	// Send Pokémon data to the client
+	// Check if client has enough pokeballs
+	playerName := findPlayerNameByAddr(addr)
+	mutex.Lock()
+	for _, player := range connectedPlayers {
+		if player.Addr.String() == addr.String() {
+			if player.Pokeballs == 0 {
+				conn.WriteToUDP([]byte("You don't have enough Pokeballs\n"), addr)
+				mutex.Unlock()
+				return
+			}
+			player.Pokeballs--
+		}
+	}
+
+	conn.WriteToUDP([]byte("Throwing a Pokeball...1...2...3..."), addr)
 	response := fmt.Sprintf("You caught a %s (Level %d, EV %.1f)\n", randomPokemon.Name, randomPokemon.Level, randomPokemon.EV)
 	conn.WriteToUDP([]byte(response), addr)
 
-	// Save the Pokémon to the player's inventory
-	playerName := findPlayerNameByAddr(addr)
-	mutex.Lock()
+	// mutex.Lock()
 	for _, player := range connectedPlayers {
 		if player.Addr.String() == addr.String() {
 			player.Inventory = append(player.Inventory, randomPokemon)

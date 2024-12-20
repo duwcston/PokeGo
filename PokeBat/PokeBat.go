@@ -110,7 +110,7 @@ func Battle(player1, player2 *model.Player, AllPokemons []model.Pokemon, conn *n
 			if BattleEnd {
 				winner = player2
 				winPokemons = LevelUpPokemon(player2.Inventory, *player2Pokemons)
-				fmt.Println("end battel")
+				fmt.Println("Battle Ended")
 				break
 			}
 			IsTurnPlayer1 = false
@@ -122,7 +122,7 @@ func Battle(player1, player2 *model.Player, AllPokemons []model.Pokemon, conn *n
 			if BattleEnd {
 				winner = player1
 				winPokemons = LevelUpPokemon(player1.Inventory, *player1Pokemons)
-				fmt.Println("end battel")
+				fmt.Println("Battle Ended")
 				break
 			}
 			IsTurnPlayer2 = false

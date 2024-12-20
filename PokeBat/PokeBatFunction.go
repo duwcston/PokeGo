@@ -29,7 +29,7 @@ func PlayerMove(player1Pokemon, player2Pokemon *model.Pokemon, player1Pokemons *
 		}
 	}
 
-	fmt.Printf("%s turn. Your current pokemon is %s. Choose your action(attack,switch,surrender,?):\n", PlayerName, player1Pokemon.Name)
+	// fmt.Printf("%s turn. Your current pokemon is %s. Choose your action(attack,switch,surrender,?):\n", PlayerName, player1Pokemon.Name)
 	conn.WriteToUDP([]byte(fmt.Sprintf("Your turn. Your current pokemon is %s. Choose your action(attack,switch,surrender,?):\n", player1Pokemon.Name)), addr1)
 	command := readCommands(conn, addr1)
 	switch command {
@@ -223,13 +223,13 @@ func PrintPokemonInfo(index int, pokemon model.Pokemon) {
 func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *[]model.Pokemon {
 	var selectedPokemons = []model.Pokemon{}
 	msg := player.Name + " please select 3 pokemons from:\n"
-	fmt.Printf("%s", msg)
+	// fmt.Printf("%s", msg)
 	_, err := conn.WriteToUDP([]byte(msg), addr)
 	if err != nil {
 		return nil
 	}
 	for i := range player.Inventory {
-		PrintPokemonInfo(i, player.Inventory[i])
+		// PrintPokemonInfo(i, player.Inventory[i])
 		_, err := conn.WriteToUDP([]byte(fmt.Sprintf("%d: %s\n", i, player.Inventory[i].Name)), addr)
 		if err != nil {
 			return nil

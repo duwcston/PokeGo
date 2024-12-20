@@ -2,19 +2,20 @@
  "Name": "Toan",
  "Addr": {
   "IP": "127.0.0.1",
-  "Port": 58251,
+  "Port": 54502,
   "Zone": ""
  },
+ "Pokeballs": 3,
  "Inventory": [
   {
    "Name": "Seaking",
    "Elements": [
     "water"
    ],
-   "Level": 27,
+   "Level": 47,
    "EV": 0.9,
    "Stats": {
-    "HP": 80,
+    "HP": 5,
     "Attack": 92,
     "Defense": 65,
     "Speed": 68,
@@ -216,7 +217,7 @@
    "Elements": [
     "poison"
    ],
-   "Level": 41,
+   "Level": 61,
    "EV": 0.6,
    "Stats": {
     "HP": 80,
@@ -422,10 +423,10 @@
     "flying",
     "normal"
    ],
-   "Level": 29,
+   "Level": 49,
    "EV": 1,
    "Stats": {
-    "HP": 85,
+    "HP": 0,
     "Attack": 120,
     "Defense": 70,
     "Speed": 100,
@@ -511,6 +512,2834 @@
      "Power": " 60",
      "Acc": 100,
      "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Bronzong",
+   "Elements": [
+    "psychic",
+    "steel"
+   ],
+   "Level": 5,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 67,
+    "Attack": 89,
+    "Defense": 116,
+    "Speed": 33,
+    "Sp_Attack": 79,
+    "Sp_Defense": 116
+   },
+   "Profile": {
+    "Height": 1.3,
+    "Weight": 187,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 0,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "Mineral",
+    "HatchSteps": 5100,
+    "Abilities": "Levitate, Heatproof, Heavy-metal"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 2
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Imprison",
+     "Element": "psychic",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Sunny day",
+     "Element": "fire",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 5,
+     "Description": ""
+    },
+    {
+     "Name": "Rain dance",
+     "Element": "water",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 5,
+     "Description": ""
+    },
+    {
+     "Name": "Hypnosis",
+     "Element": "psychic",
+     "Power": " N/A",
+     "Acc": 60,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Ninjask",
+   "Elements": [
+    "bug",
+    "flying"
+   ],
+   "Level": 8,
+   "EV": 0,
+   "Stats": {
+    "HP": 61,
+    "Attack": 90,
+    "Defense": 45,
+    "Speed": 160,
+    "Sp_Attack": 50,
+    "Sp_Defense": 50
+   },
+   "Profile": {
+    "Height": 0.8,
+    "Weight": 12,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 3825,
+    "Abilities": "Speed-boost, Infiltrator"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "rock",
+     "Coefficient": 4
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Bug bite",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Leech life",
+     "Element": "bug",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Harden",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Sand attack",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Kakuna",
+   "Elements": [
+    "bug",
+    "poison"
+   ],
+   "Level": 9,
+   "EV": 0,
+   "Stats": {
+    "HP": 45,
+    "Attack": 25,
+    "Defense": 50,
+    "Speed": 35,
+    "Sp_Attack": 25,
+    "Sp_Defense": 25
+   },
+   "Profile": {
+    "Height": 0.6,
+    "Weight": 10,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 3825,
+    "Abilities": "Shed-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "psychic",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    }
+   ],
+   "EvolutionLevel": 10,
+   "NextEvolution": "Beedrill",
+   "Moves": [
+    {
+     "Name": "Harden",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Bug bite",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Electroweb",
+     "Element": "electric",
+     "Power": " 55",
+     "Acc": 95,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Iron defense",
+     "Element": "steel",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Forretress",
+   "Elements": [
+    "steel",
+    "bug"
+   ],
+   "Level": 7,
+   "EV": 0.7,
+   "Stats": {
+    "HP": 75,
+    "Attack": 90,
+    "Defense": 140,
+    "Speed": 40,
+    "Sp_Attack": 60,
+    "Sp_Defense": 60
+   },
+   "Profile": {
+    "Height": 1.2,
+    "Weight": 125.8,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 5100,
+    "Abilities": "Sturdy, Overcoat"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "fire",
+     "Coefficient": 4
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Bug bite",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Toxic spikes",
+     "Element": "poison",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Protect",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Selfdestruct",
+     "Element": "normal",
+     "Power": " 200",
+     "Acc": 100,
+     "PP": 5,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Cyndaquil",
+   "Elements": [
+    "fire"
+   ],
+   "Level": 6,
+   "EV": 0.7,
+   "Stats": {
+    "HP": 39,
+    "Attack": 52,
+    "Defense": 43,
+    "Speed": 65,
+    "Sp_Attack": 60,
+    "Sp_Defense": 50
+   },
+   "Profile": {
+    "Height": 0.5,
+    "Weight": 7.9,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 87.5,
+     "FemaleRatio": 12.5
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Flash-fire, Blaze"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 14,
+   "NextEvolution": "Quilava",
+   "Moves": [
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Smokescreen",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Ember",
+     "Element": "fire",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Cascoon",
+   "Elements": [
+    "bug"
+   ],
+   "Level": 3,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 50,
+    "Attack": 35,
+    "Defense": 55,
+    "Speed": 15,
+    "Sp_Attack": 25,
+    "Sp_Defense": 25
+   },
+   "Profile": {
+    "Height": 0.7,
+    "Weight": 11.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 3825,
+    "Abilities": "Shed-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 10,
+   "NextEvolution": "Dustox",
+   "Moves": [
+    {
+     "Name": "Harden",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Bug bite",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Electroweb",
+     "Element": "electric",
+     "Power": " 55",
+     "Acc": 95,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Iron defense",
+     "Element": "steel",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Azumarill",
+   "Elements": [
+    "fairy",
+    "water"
+   ],
+   "Level": 9,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 100,
+    "Attack": 50,
+    "Defense": 80,
+    "Speed": 50,
+    "Sp_Attack": 60,
+    "Sp_Defense": 80
+   },
+   "Profile": {
+    "Height": 0.8,
+    "Weight": 28.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Water 1, Fairy",
+    "HatchSteps": 2550,
+    "Abilities": "Huge-power, Thick-fat, Sap-sipper"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "dark",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Water sport",
+     "Element": "water",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Bubble",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Defense curl",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Water gun",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Parasect",
+   "Elements": [
+    "grass",
+    "bug"
+   ],
+   "Level": 10,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 60,
+    "Attack": 95,
+    "Defense": 80,
+    "Speed": 30,
+    "Sp_Attack": 60,
+    "Sp_Defense": 80
+   },
+   "Profile": {
+    "Height": 1,
+    "Weight": 29.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug, Grass",
+    "HatchSteps": 5100,
+    "Abilities": "Damp, Effect-spore, Dry-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 4
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 4
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 2
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Cross poison",
+     "Element": "poison",
+     "Power": " 70",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Poisonpowder",
+     "Element": "poison",
+     "Power": " N/A",
+     "Acc": 75,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Leech life",
+     "Element": "bug",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Stun spore",
+     "Element": "grass",
+     "Power": " N/A",
+     "Acc": 75,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Lumineon",
+   "Elements": [
+    "water"
+   ],
+   "Level": 2,
+   "EV": 0.9,
+   "Stats": {
+    "HP": 69,
+    "Attack": 69,
+    "Defense": 76,
+    "Speed": 91,
+    "Sp_Attack": 69,
+    "Sp_Defense": 86
+   },
+   "Profile": {
+    "Height": 1.2,
+    "Weight": 24,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Water 2",
+    "HatchSteps": 5100,
+    "Abilities": "Swift-swim, Water-veil, Storm-drain"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Attract",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Water gun",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    },
+    {
+     "Name": "Pound",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Rain dance",
+     "Element": "water",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 5,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Swinub",
+   "Elements": [
+    "ice",
+    "ground"
+   ],
+   "Level": 8,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 50,
+    "Attack": 50,
+    "Defense": 40,
+    "Speed": 50,
+    "Sp_Attack": 30,
+    "Sp_Defense": 30
+   },
+   "Profile": {
+    "Height": 0.4,
+    "Weight": 6.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Oblivious, Thick-fat, Snow-cloak"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 2
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 33,
+   "NextEvolution": "Piloswine",
+   "Moves": [
+    {
+     "Name": "Odor sleuth",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Mud sport",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Powder snow",
+     "Element": "ice",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Accelgor",
+   "Elements": [
+    "bug"
+   ],
+   "Level": 4,
+   "EV": 0.9,
+   "Stats": {
+    "HP": 80,
+    "Attack": 70,
+    "Defense": 40,
+    "Speed": 145,
+    "Sp_Attack": 100,
+    "Sp_Defense": 60
+   },
+   "Profile": {
+    "Height": 0.8,
+    "Weight": 25.3,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 3825,
+    "Abilities": "Sticky-hold, Unburden, Hydration"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Acid spray",
+     "Element": "poison",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Leech life",
+     "Element": "bug",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Double team",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Quick attack",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Kricketot",
+   "Elements": [
+    "bug"
+   ],
+   "Level": 9,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 37,
+    "Attack": 25,
+    "Defense": 41,
+    "Speed": 25,
+    "Sp_Attack": 25,
+    "Sp_Defense": 41
+   },
+   "Profile": {
+    "Height": 0.3,
+    "Weight": 2.2,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 3825,
+    "Abilities": "Run-away, Shed-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 10,
+   "NextEvolution": "Kricketune",
+   "Moves": [
+    {
+     "Name": "Bide",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Growl",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Struggle bug",
+     "Element": "bug",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Bug bite",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Excadrill",
+   "Elements": [
+    "steel",
+    "ground"
+   ],
+   "Level": 8,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 110,
+    "Attack": 135,
+    "Defense": 60,
+    "Speed": 88,
+    "Sp_Attack": 50,
+    "Sp_Defense": 65
+   },
+   "Profile": {
+    "Height": 0.7,
+    "Weight": 40.4,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Mold-breaker, Sand-rush, Sand-force"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Mud sport",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Rapid spin",
+     "Element": "normal",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Mud slap",
+     "Element": "ground",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Scratch",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Ludicolo",
+   "Elements": [
+    "grass",
+    "water"
+   ],
+   "Level": 1,
+   "EV": 0,
+   "Stats": {
+    "HP": 80,
+    "Attack": 70,
+    "Defense": 70,
+    "Speed": 70,
+    "Sp_Attack": 90,
+    "Sp_Defense": 100
+   },
+   "Profile": {
+    "Height": 1.5,
+    "Weight": 55,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Water 1, Grass",
+    "HatchSteps": 3825,
+    "Abilities": "Own-tempo, Swift-swim, Rain-dish"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 2
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Mega drain",
+     "Element": "grass",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Astonish",
+     "Element": "ghost",
+     "Power": " 30",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Nature power",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Absorb",
+     "Element": "grass",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Cinccino",
+   "Elements": [
+    "normal"
+   ],
+   "Level": 10,
+   "EV": 0,
+   "Stats": {
+    "HP": 75,
+    "Attack": 95,
+    "Defense": 60,
+    "Speed": 115,
+    "Sp_Attack": 65,
+    "Sp_Defense": 60
+   },
+   "Profile": {
+    "Height": 0.5,
+    "Weight": 7.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 25,
+     "FemaleRatio": 75
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 3825,
+    "Abilities": "Cute-charm, Skill-link, Technician"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "fighting",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Tail slap",
+     "Element": "normal",
+     "Power": " 25",
+     "Acc": 85,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Rock blast",
+     "Element": "rock",
+     "Power": " 25",
+     "Acc": 90,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Bullet seed",
+     "Element": "grass",
+     "Power": " 25",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Tickle",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Gible",
+   "Elements": [
+    "dragon",
+    "ground"
+   ],
+   "Level": 3,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 58,
+    "Attack": 70,
+    "Defense": 45,
+    "Speed": 42,
+    "Sp_Attack": 40,
+    "Sp_Defense": 45
+   },
+   "Profile": {
+    "Height": 0.7,
+    "Weight": 20.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Monster, Dragon",
+    "HatchSteps": 10200,
+    "Abilities": "Sand-veil, Rough-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ice",
+     "Coefficient": 4
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 2
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 24,
+   "NextEvolution": "Gabite",
+   "Moves": [
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Sand attack",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Dragon rage",
+     "Element": "dragon",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Sandstorm",
+     "Element": "rock",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Mew",
+   "Elements": [
+    "psychic"
+   ],
+   "Level": 10,
+   "EV": 0.9,
+   "Stats": {
+    "HP": 100,
+    "Attack": 100,
+    "Defense": 100,
+    "Speed": 100,
+    "Sp_Attack": 100,
+    "Sp_Defense": 100
+   },
+   "Profile": {
+    "Height": 0.4,
+    "Weight": 4,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 0,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "No Eggs",
+    "HatchSteps": 30600,
+    "Abilities": "Synchronize"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "bug",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 2
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dragon",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Reflect type",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Pound",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Transform",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Mega punch",
+     "Element": "normal",
+     "Power": " 80",
+     "Acc": 85,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Sawk",
+   "Elements": [
+    "fighting"
+   ],
+   "Level": 29,
+   "EV": 0.5,
+   "Stats": {
+    "HP": 70,
+    "Attack": 125,
+    "Defense": 75,
+    "Speed": 85,
+    "Sp_Attack": 30,
+    "Sp_Defense": 75
+   },
+   "Profile": {
+    "Height": 1.4,
+    "Weight": 51,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 100,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "Human-Like",
+    "HatchSteps": 5100,
+    "Abilities": "Sturdy, Inner-focus, Mold-breaker"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "psychic",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "dark",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Rock smash",
+     "Element": "fighting",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Bide",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Focus energy",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Dusknoir",
+   "Elements": [
+    "ghost"
+   ],
+   "Level": 29,
+   "EV": 0,
+   "Stats": {
+    "HP": 45,
+    "Attack": 100,
+    "Defense": 135,
+    "Speed": 45,
+    "Sp_Attack": 65,
+    "Sp_Defense": 135
+   },
+   "Profile": {
+    "Height": 2.2,
+    "Weight": 106.6,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Amorphous",
+    "HatchSteps": 6375,
+    "Abilities": "Pressure"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ghost",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dark",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Gravity",
+     "Element": "psychic",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 5,
+     "Description": ""
+    },
+    {
+     "Name": "Night shade",
+     "Element": "ghost",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Disable",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Unfezant",
+   "Elements": [
+    "flying",
+    "normal"
+   ],
+   "Level": 30,
+   "EV": 0.7,
+   "Stats": {
+    "HP": 0,
+    "Attack": 115,
+    "Defense": 80,
+    "Speed": 93,
+    "Sp_Attack": 65,
+    "Sp_Defense": 55
+   },
+   "Profile": {
+    "Height": 1.2,
+    "Weight": 29,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Flying",
+    "HatchSteps": 3825,
+    "Abilities": "Rivalry, Super-luck, Big-pecks"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ghost",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Quick attack",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Growl",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Gust",
+     "Element": "flying",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Dusknoir",
+   "Elements": [
+    "ghost"
+   ],
+   "Level": 3,
+   "EV": 0.6,
+   "Stats": {
+    "HP": 45,
+    "Attack": 100,
+    "Defense": 135,
+    "Speed": 45,
+    "Sp_Attack": 65,
+    "Sp_Defense": 135
+   },
+   "Profile": {
+    "Height": 2.2,
+    "Weight": 106.6,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Amorphous",
+    "HatchSteps": 6375,
+    "Abilities": "Pressure"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ghost",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dark",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Gravity",
+     "Element": "psychic",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 5,
+     "Description": ""
+    },
+    {
+     "Name": "Night shade",
+     "Element": "ghost",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Disable",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    },
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Venomoth",
+   "Elements": [
+    "bug",
+    "poison"
+   ],
+   "Level": 4,
+   "EV": 0.7,
+   "Stats": {
+    "HP": 70,
+    "Attack": 65,
+    "Defense": 60,
+    "Speed": 90,
+    "Sp_Attack": 90,
+    "Sp_Defense": 75
+   },
+   "Profile": {
+    "Height": 1.5,
+    "Weight": 12.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Bug",
+    "HatchSteps": 5100,
+    "Abilities": "Shield-dust, Tinted-lens, Wonder-skin"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "psychic",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fairy",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0.25
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 0.25
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Silver wind",
+     "Element": "bug",
+     "Power": " 60",
+     "Acc": 100,
+     "PP": 5,
+     "Description": ""
+    },
+    {
+     "Name": "Foresight",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Confusion",
+     "Element": "psychic",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    },
+    {
+     "Name": "Supersonic",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 55,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Drilbur",
+   "Elements": [
+    "ground"
+   ],
+   "Level": 9,
+   "EV": 0.9,
+   "Stats": {
+    "HP": 60,
+    "Attack": 85,
+    "Defense": 40,
+    "Speed": 68,
+    "Sp_Attack": 30,
+    "Sp_Defense": 45
+   },
+   "Profile": {
+    "Height": 0.3,
+    "Weight": 8.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 50,
+     "FemaleRatio": 50
+    },
+    "EggGroup": "Field",
+    "HatchSteps": 5100,
+    "Abilities": "Mold-breaker, Sand-rush, Sand-force"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 2
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 31,
+   "NextEvolution": "Excadrill",
+   "Moves": [
+    {
+     "Name": "Mud sport",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Scratch",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Rapid spin",
+     "Element": "normal",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 40,
+     "Description": ""
+    },
+    {
+     "Name": "Mud slap",
+     "Element": "ground",
+     "Power": " 20",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Anorith",
+   "Elements": [
+    "bug",
+    "rock"
+   ],
+   "Level": 1,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 45,
+    "Attack": 95,
+    "Defense": 50,
+    "Speed": 75,
+    "Sp_Attack": 40,
+    "Sp_Defense": 50
+   },
+   "Profile": {
+    "Height": 0.7,
+    "Weight": 12.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 87.5,
+     "FemaleRatio": 12.5
+    },
+    "EggGroup": "Water 3",
+    "HatchSteps": 7650,
+    "Abilities": "Battle-armor, Swift-swim"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "steel",
+     "Coefficient": 2
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "rock",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 40,
+   "NextEvolution": "Armaldo",
+   "Moves": [
+    {
+     "Name": "Scratch",
+     "Element": "normal",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Harden",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Mud sport",
+     "Element": "ground",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Water gun",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Squirtle",
+   "Elements": [
+    "water"
+   ],
+   "Level": 2,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 44,
+    "Attack": 48,
+    "Defense": 65,
+    "Speed": 43,
+    "Sp_Attack": 50,
+    "Sp_Defense": 64
+   },
+   "Profile": {
+    "Height": 0.5,
+    "Weight": 9,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 87.5,
+     "FemaleRatio": 12.5
+    },
+    "EggGroup": "Monster, Water 1",
+    "HatchSteps": 5100,
+    "Abilities": "Rain-dish, Torrent"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "water",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "ice",
+     "Coefficient": 0.5
+    }
+   ],
+   "EvolutionLevel": 16,
+   "NextEvolution": "Wartortle",
+   "Moves": [
+    {
+     "Name": "Tail whip",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Tackle",
+     "Element": "normal",
+     "Power": " 50",
+     "Acc": 100,
+     "PP": 35,
+     "Description": ""
+    },
+    {
+     "Name": "Bubble",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Water gun",
+     "Element": "water",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 25,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Rotom",
+   "Elements": [
+    "electric",
+    "ghost"
+   ],
+   "Level": 1,
+   "EV": 0.8,
+   "Stats": {
+    "HP": 50,
+    "Attack": 50,
+    "Defense": 77,
+    "Speed": 91,
+    "Sp_Attack": 95,
+    "Sp_Defense": 77
+   },
+   "Profile": {
+    "Height": 0.3,
+    "Weight": 0.3,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 0,
+     "FemaleRatio": 0
+    },
+    "EggGroup": "Amorphous",
+    "HatchSteps": 5100,
+    "Abilities": "Levitate"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "ghost",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "dark",
+     "Coefficient": 2
+    },
+    {
+     "Element": "bug",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "electric",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    },
+    {
+     "Element": "fighting",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 0,
+   "NextEvolution": "",
+   "Moves": [
+    {
+     "Name": "Astonish",
+     "Element": "ghost",
+     "Power": " 30",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Trick",
+     "Element": "psychic",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Confuse ray",
+     "Element": "ghost",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 10,
+     "Description": ""
+    },
+    {
+     "Name": "Thunder wave",
+     "Element": "electric",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 20,
+     "Description": ""
+    }
+   ]
+  },
+  {
+   "Name": "Cranidos",
+   "Elements": [
+    "rock"
+   ],
+   "Level": 6,
+   "EV": 1,
+   "Stats": {
+    "HP": 67,
+    "Attack": 125,
+    "Defense": 40,
+    "Speed": 58,
+    "Sp_Attack": 30,
+    "Sp_Defense": 30
+   },
+   "Profile": {
+    "Height": 0.9,
+    "Weight": 31.5,
+    "CatchRate": 0,
+    "GenderRatio": {
+     "MaleRatio": 87.5,
+     "FemaleRatio": 12.5
+    },
+    "EggGroup": "Monster",
+    "HatchSteps": 7650,
+    "Abilities": "Mold-breaker, Sheer-force"
+   },
+   "DamegeWhenAttacked": [
+    {
+     "Element": "fighting",
+     "Coefficient": 2
+    },
+    {
+     "Element": "normal",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "ground",
+     "Coefficient": 2
+    },
+    {
+     "Element": "flying",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "steel",
+     "Coefficient": 2
+    },
+    {
+     "Element": "poison",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "water",
+     "Coefficient": 2
+    },
+    {
+     "Element": "fire",
+     "Coefficient": 0.5
+    },
+    {
+     "Element": "grass",
+     "Coefficient": 2
+    },
+    {
+     "Element": "",
+     "Coefficient": 0
+    }
+   ],
+   "EvolutionLevel": 30,
+   "NextEvolution": "Rampardos",
+   "Moves": [
+    {
+     "Name": "Leer",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 100,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Headbutt",
+     "Element": "normal",
+     "Power": " 70",
+     "Acc": 100,
+     "PP": 15,
+     "Description": ""
+    },
+    {
+     "Name": "Focus energy",
+     "Element": "normal",
+     "Power": " N/A",
+     "Acc": 0,
+     "PP": 30,
+     "Description": ""
+    },
+    {
+     "Name": "Pursuit",
+     "Element": "dark",
+     "Power": " 40",
+     "Acc": 100,
+     "PP": 20,
      "Description": ""
     }
    ]
