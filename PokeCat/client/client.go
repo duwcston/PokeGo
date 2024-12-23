@@ -107,14 +107,14 @@ func main() {
 	name := scanner.Text()
 	conn.Write([]byte("JOIN AS " + name + "\n"))
 
+	// Start the game
+	game := NewGame(conn)
+
 	// Listen for messages from the server
-	go listenToServer(conn)
+	go listenToServer(conn, game)
 
 	// Listen for player input
 	go listenForInput(conn)
-
-	// Start the game
-	game := NewGame()
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
 	ebiten.SetWindowTitle("Pokémon Multiplayer Game")
@@ -127,7 +127,7 @@ func main() {
 	}
 }
 
-func listenToServer(conn *net.UDPConn) {
+func listenToServer(conn *net.UDPConn, game *Game) {
 	buffer := make([]byte, 1024)
 	for {
 		n, _, err := conn.ReadFromUDP(buffer)
@@ -137,6 +137,12 @@ func listenToServer(conn *net.UDPConn) {
 		}
 		message := string(buffer[:n])
 		fmt.Println("Server:", message)
+
+		// Check if the player has left pokestop
+		if message == "Exited PokeStop.\n" {
+			time.Sleep(2 * time.Second) // Add delay to prevent spamming
+			game.isAccessedPokestop = false
+		}
 
 		if message == "You have left the game.\n" {
 			os.Exit(0)
