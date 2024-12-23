@@ -105,6 +105,8 @@ func main() {
 				continue
 			}
 
+			// TODO: Handle synchronization issues with multiple clients
+			// TODO: Handle continous messages from the same client
 			if message == "pokestop" {
 				response := "Choose an option:\n1. Revive all Pokemons\n2. Get Pokeballs\n"
 				conn.WriteToUDP([]byte(response), clientAddr)
