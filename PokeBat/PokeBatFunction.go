@@ -161,7 +161,7 @@ func displaySelectedPokemons(pokemonsList []model.Pokemon, conn *net.UDPConn, ad
 
 func switchToChosenPokemon(pokemonsList []model.Pokemon, conn *net.UDPConn, addr *net.UDPAddr) *model.Pokemon {
 	for {
-		index := readIndex(conn)
+		index := readIndex(conn, addr)
 		if index < 0 || index >= len(pokemonsList) {
 			conn.WriteToUDP([]byte("Please enter a valid index.\n"), addr)
 			continue
@@ -176,7 +176,11 @@ func switchToChosenPokemon(pokemonsList []model.Pokemon, conn *net.UDPConn, addr
 
 func readCommands(conn *net.UDPConn, addr *net.UDPAddr) string {
 	buffer := make([]byte, 1024)
-	n, _, _ := conn.ReadFromUDP(buffer)
+	n, address, _ := conn.ReadFromUDP(buffer)
+	if addr.String() != address.String() {
+		conn.WriteToUDP([]byte("Not your turn\n"), address)
+		return readCommands(conn, addr)
+	}
 	command := strings.TrimSpace(string(buffer[:n]))
 	if command == "attack" || command == "switch" || command == "surrender" || command == "?" {
 		return strings.ToLower(command)
@@ -185,9 +189,13 @@ func readCommands(conn *net.UDPConn, addr *net.UDPAddr) string {
 	return readCommands(conn, addr)
 }
 
-func readIndex(conn *net.UDPConn) int {
+func readIndex(conn *net.UDPConn, addr *net.UDPAddr) int {
 	buffer := make([]byte, 1024)
-	n, _, _ := conn.ReadFromUDP(buffer)
+	n, address, _ := conn.ReadFromUDP(buffer)
+	if addr.String() != address.String() {
+		conn.WriteToUDP([]byte("Not your turn\n"), address)
+		return 100
+	}
 	input := strings.TrimSpace(string(buffer[:n]))
 	index, _ := strconv.Atoi(input)
 	return index
@@ -242,7 +250,7 @@ func selectPokemon(player *model.Player, conn *net.UDPConn, addr *net.UDPAddr) *
 			break
 		}
 		conn.WriteToUDP([]byte(fmt.Sprintf("Enter the index of the %d pokemon you want to select: ", counter)), addr)
-		index := readIndex(conn)
+		index := readIndex(conn, addr)
 		if index < 0 || index >= len(player.Inventory) {
 			conn.WriteToUDP([]byte("Invalid index\n"), addr)
 			continue

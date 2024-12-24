@@ -17,12 +17,10 @@ import (
 
 const (
 	pokedexPath = "../../Pokedex/pokedex.json"
-	//pokedexPath = "Pokedex/pokedex.json"
 
-	maxCapacity = 200
-	HOST        = "10.238.26.98"
-	PORT        = "3000"
-	//InventoryPath = "PokeCat/Inventories/Player_%s_Inventory.json"
+	maxCapacity   = 200
+	HOST          = "10.238.26.98"
+	PORT          = "3000"
 	InventoryPath = "../Inventories/Player_%s_Inventory.json"
 )
 
@@ -170,8 +168,10 @@ func main() {
 					IsInBattle = true
 					SenderResult, ReceiverResult := PokeBat.Battle(Sender, Receiver, *AllPokemons, conn, Sender.Addr, Receiver.Addr)
 					IsInBattle = false
-					connectedPlayers[SenderResult.Name].Inventory = SenderResult.Inventory
-					connectedPlayers[ReceiverResult.Name].Inventory = ReceiverResult.Inventory
+					if SenderResult != nil || ReceiverResult != nil {
+						connectedPlayers[SenderResult.Name].Inventory = SenderResult.Inventory
+						connectedPlayers[ReceiverResult.Name].Inventory = ReceiverResult.Inventory
+					}
 
 					// Save inventory after battle for both players
 					if err := SaveInventory(Sender); err != nil {
