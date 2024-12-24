@@ -20,7 +20,7 @@ const (
 	//pokedexPath = "Pokedex/pokedex.json"
 
 	maxCapacity = 200
-	HOST        = "localhost"
+	HOST        = "10.238.26.98"
 	PORT        = "3000"
 	//InventoryPath = "PokeCat/Inventories/Player_%s_Inventory.json"
 	InventoryPath = "../Inventories/Player_%s_Inventory.json"
@@ -68,6 +68,7 @@ func main() {
 		fmt.Println("Error resolving address: ", err)
 		return
 	}
+
 	buffer := make([]byte, 1024)
 	for {
 		if !IsInBattle {
@@ -171,6 +172,8 @@ func main() {
 					IsInBattle = false
 					connectedPlayers[SenderResult.Name].Inventory = SenderResult.Inventory
 					connectedPlayers[ReceiverResult.Name].Inventory = ReceiverResult.Inventory
+
+					// Save inventory after battle for both players
 					if err := SaveInventory(Sender); err != nil {
 						fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
 						conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
@@ -183,17 +186,6 @@ func main() {
 						mutex.Unlock()
 						return
 					}
-
-					// Evolution
-					//if LevelUpPokemons != nil {
-					//	PokeBat.EvolutionProcess(*connectedPlayers[winner], LevelUpPokemons, *AllPokemons, conn)
-					//	if err := SaveInventory(Sender); err != nil {
-					//		fmt.Printf("Error saving inventory for %s: %v\n", Sender.Name, err)
-					//		conn.WriteToUDP([]byte("Failed to save inventory\n"), Sender.Addr)
-					//		mutex.Unlock()
-					//		return
-					//	}
-					//}
 					continue
 				} else {
 					conn.WriteToUDP([]byte("User "+target+" not found"), Sender.Addr)
@@ -233,7 +225,7 @@ func handlePlayerConnection(playerName string, conn *net.UDPConn, addr *net.UDPA
 	player := &model.Player{
 		Name:      playerName,
 		Addr:      addr,
-		Pokeballs: 1,
+		Pokeballs: 5,
 		Inventory: []model.Pokemon{},
 	}
 	connectedPlayers[playerName] = player
@@ -289,7 +281,6 @@ func sendRandomPokemon(pokedexJSON []model.Pokemon, conn *net.UDPConn, addr *net
 	randomPokemon.Level = rand.Intn(10) + 1
 
 	// Send Pokémon data to the client
-	// Check if client has enough pokeballs
 	playerName := findPlayerNameByAddr(addr)
 	mutex.Lock()
 	for _, player := range connectedPlayers {

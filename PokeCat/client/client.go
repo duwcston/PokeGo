@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	HOST = "localhost"
+	HOST = "10.238.26.98"
 	PORT = "3000"
 	TYPE = "udp4" // Use UDP for communication
 )
@@ -117,7 +117,7 @@ func main() {
 	go listenForInput(conn)
 
 	ebiten.SetWindowSize(constants.ScreenWidth, constants.ScreenHeight)
-	ebiten.SetWindowTitle("Pokémon Multiplayer Game")
+	ebiten.SetWindowTitle(name + "'s Pokeworld")
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
 
 	game.spawnPokeballs()

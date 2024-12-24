@@ -30,7 +30,7 @@ func PlayerMove(player1Pokemon, player2Pokemon *model.Pokemon, player1Pokemons *
 	}
 
 	// fmt.Printf("%s turn. Your current pokemon is %s. Choose your action(attack,switch,surrender,?):\n", PlayerName, player1Pokemon.Name)
-	conn.WriteToUDP([]byte(fmt.Sprintf("Your turn. Your current pokemon is %s. Choose your action(attack,switch,surrender,?):\n", player1Pokemon.Name)), addr1)
+	conn.WriteToUDP([]byte(fmt.Sprintf("Your turn. Your current pokemon is %s. Choose your action:\nattack\t\tswitch\nsurrender\t?\n", player1Pokemon.Name)), addr1)
 	command := readCommands(conn, addr1)
 	switch command {
 	case "attack":

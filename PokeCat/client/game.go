@@ -149,17 +149,17 @@ func (g *Game) Update() error {
 		randomDirection := rand.Intn(4)
 		switch randomDirection {
 		case 0:
-			g.player.Dx = -constants.Tilesize
+			g.player.Dx = -constants.Tilesize * 4
 			g.player.Dy = 0
 		case 1:
-			g.player.Dx = constants.Tilesize
+			g.player.Dx = constants.Tilesize * 4
 			g.player.Dy = 0
 		case 2:
 			g.player.Dx = 0
-			g.player.Dy = -constants.Tilesize
+			g.player.Dy = -constants.Tilesize * 4
 		case 3:
 			g.player.Dx = 0
-			g.player.Dy = constants.Tilesize
+			g.player.Dy = constants.Tilesize * 4
 		}
 		g.player.X += g.player.Dx
 		g.player.Y += g.player.Dy
