@@ -19,7 +19,7 @@ const (
 	pokedexPath = "../../Pokedex/pokedex.json"
 
 	maxCapacity   = 200
-	HOST          = "10.238.26.98"
+	HOST          = "localhost"
 	PORT          = "3000"
 	InventoryPath = "../Inventories/Player_%s_Inventory.json"
 )

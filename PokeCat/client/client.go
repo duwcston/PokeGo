@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	HOST = "10.238.26.98"
+	HOST = "localhost"
 	PORT = "3000"
 	TYPE = "udp4" // Use UDP for communication
 )
